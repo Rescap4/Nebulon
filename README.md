@@ -10,6 +10,21 @@ There is more than 40 levels, they all have a solution.
 Progress is automatically saved across up to five save files.
 Run main.py to play (requires Python and Pygame installed).
 
+## Controls ##
+W, A, S, D - Move
+P - Pause
+U - Undo
+I- Change
+enter - Select
+backspace - Return
+
+Toggle on/off options, also accessible from the menu
+F - Full screen
+G - Grid
+T - Shake screen
+M - Music
+N - Sound effects
+
 -----------------------------------------------------------------------------------------------------
 
 ## Credits ##

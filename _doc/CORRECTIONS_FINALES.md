@@ -1,4 +1,4 @@
-# ✅ Corrections finales pour PyInstaller
+# Corrections finales pour PyInstaller
 
 ## Tous les chemins sont maintenant corrigés !
 
