@@ -1,8 +1,8 @@
-# 🚀 Build Nebulon - Méthode simple
+#  Build Nebulon - Méthode simple
 
-## ✅ Modifications effectuées
+##  Modifications effectuées
 
-J'ai modifié votre code pour qu'il fonctionne avec PyInstaller `--onefile` :
+Code modifié pour qu'il fonctionne avec PyInstaller `--onefile` :
 
 ### Fichiers modifiés :
 
@@ -18,7 +18,7 @@ J'ai modifié votre code pour qu'il fonctionne avec PyInstaller `--onefile` :
    - Le fichier de sauvegarde reste dans le répertoire courant (à côté de l'exe)
    - Création automatique du dossier `data/` si nécessaire
 
-## 🎯 Comment ça marche
+##  Comment ça marche
 
 ### En mode développement :
 ```
@@ -37,11 +37,11 @@ Nebulon_Game/
     └── save_file.txt              ← Sauvegarde créée ici
 ```
 
-**Astuce :** PyInstaller extrait temporairement les ressources dans `C:\Users\...\Temp\_MEI123456\`, mais le code utilise automatiquement `sys._MEIPASS` pour les trouver.
+PyInstaller extrait temporairement les ressources dans `C:\Users\...\Temp\_MEI123456\`, mais le code utilise automatiquement `sys._MEIPASS` pour les trouver.
 
-## 🚀 Créer l'exe
+##  Créer l'exe
 
-### Méthode 1 : Script automatique (recommandé)
+### Méthode 1 : Script automatique
 
 ```powershell
 .\build_simple.bat
@@ -53,7 +53,7 @@ Nebulon_Game/
 pyinstaller --onefile --add-data "data;data" --add-data "images;images" --add-data "sounds;sounds" --noconsole --name=Nebulon code/main.py
 ```
 
-## 📦 Résultat
+## Résultat
 
 Après le build :
 
@@ -64,12 +64,12 @@ Nebulon_Game/
 ```
 
 **Avantages de cette méthode :**
-- ✅ Un seul fichier `.exe` (tout est inclus)
-- ✅ Les sauvegardes sont créées à côté de l'exe
-- ✅ Facile à distribuer (juste le dossier `Nebulon_Game/`)
-- ✅ Pas besoin de .spec compliqué
+- Un seul fichier `.exe` (tout est inclus)
+- Les sauvegardes sont créées à côté de l'exe
+- Facile à distribuer (juste le dossier `Nebulon_Game/`)
+- Pas besoin de .spec compliqué
 
-## 🎮 Tester
+##  Tester
 
 ```powershell
 cd Nebulon_Game
@@ -77,24 +77,10 @@ cd Nebulon_Game
 ```
 
 Le jeu devrait :
-- ✅ Se lancer sans erreur
-- ✅ Charger tous les graphismes
-- ✅ Jouer la musique
-- ✅ Créer `data/save_file.txt` automatiquement
-
-## 📊 Distribution
-
-Pour partager votre jeu :
-
-1. **Créer un ZIP** du dossier `Nebulon_Game/`
-2. **Partager** le ZIP
-
-Vos joueurs n'ont qu'à :
-1. Décompresser
-2. Double-cliquer sur `Nebulon.exe`
-3. Jouer !
-
-## 🔍 Vérification du code
+- Se lancer sans erreur
+- Charger tous les graphismes
+- Jouer la musique
+- Créer `data/save_file.txt` automatiquement
 
 ### BASE_PATH dans support.py
 
@@ -123,17 +109,17 @@ os.makedirs('data', exist_ok=True)              # Créer data/ si nécessaire
 - Le fichier de sauvegarde est créé à `Nebulon_Game/data/save_file.txt`
 - Pas dans le dossier temporaire de PyInstaller !
 
-## ⚠️ Important
+##  Important
 
 ### Ressources (data, images, sounds)
-- ✅ Lecture depuis `sys._MEIPASS` (dossier temporaire)
-- ✅ Incluses dans l'exe via `--add-data`
+- Lecture depuis `sys._MEIPASS` (dossier temporaire)
+- Incluses dans l'exe via `--add-data`
 
 ### Sauvegardes (data/save_file.txt)
-- ✅ Écriture dans le répertoire courant (à côté de l'exe)
-- ✅ Persiste entre les sessions
+- Écriture dans le répertoire courant (à côté de l'exe)
+- Persiste entre les sessions
 
-## 🐛 Dépannage
+## Dépannage
 
 ### L'exe ne se lance pas
 1. Vérifiez que pygame-ce est installé : `pip install pygame-ce`
@@ -147,7 +133,7 @@ os.makedirs('data', exist_ok=True)              # Créer data/ si nécessaire
 - Vérifiez que le dossier `data/` existe à côté de l'exe
 - Le script `build_simple.bat` le crée automatiquement
 
-## 📝 Commande complète expliquée
+## Commande complète expliquée
 
 ```bash
 pyinstaller \
@@ -159,10 +145,6 @@ pyinstaller \
   --name=Nebulon                     # Nom de l'exe
   code/main.py                       # Script principal
 ```
-
-## ✨ C'est tout !
-
-Votre jeu est maintenant distribuable en un seul exe ! 🎉
 
 ---
 

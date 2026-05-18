@@ -1,7 +1,5 @@
 
 
-
-
 # Nebulon
 Nebulon is a minimalist puzzle game set in a distant nebula.
 Help some small cube-shaped robots complete their mysterious mission!
@@ -12,6 +10,7 @@ Run main.py to play (requires Python and Pygame installed).
 
 ## Controls ##
 W, A, S, D - Move
+
 P - Pause
 U - Undo
 I- Change

@@ -93,6 +93,6 @@ else:
 - En **développement** : `BASE_PATH = "C:\...\Nebulon"`
 - En **exe** : `BASE_PATH = "C:\Users\...\Temp\_MEI123456"`
 
-Tous les chemins de ressources utilisent maintenant `BASE_PATH` !
+Tous les chemins de ressources utilisent maintenant `BASE_PATH`
 
 ---
