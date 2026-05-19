@@ -15,6 +15,7 @@ from data import Data
 
 class Game:
     def __init__(self):
+        pygame.mixer.pre_init(44100, -16, 2, 512)
         pygame.init()
         pygame.mixer.init()
         pygame.display.set_caption('Nebulon')
@@ -262,7 +263,7 @@ class Game:
                         self.ui.switch_index = 0
                     case 'Quitter Jeu':
                         self.ui.open_index = 0
-                        self.switch_level('home', self.screen_dimension)
+                        self.running = False
 
             elif self.ui.state == 'options' and map_flag:
                 self.option_trigger()
@@ -438,13 +439,15 @@ class Game:
             self.general_text(dt)
             self.open_menu()
             self.fade_out()
+
             # debug section
             #debug(round(self.clock.get_fps()))
             #debug(self.current_stage.update_flag)
             pygame.display.update()
         
+        pygame.time.wait(200)
         pygame.quit()
- 
+
 if __name__ == '__main__':
     game = Game()
     game.run() 

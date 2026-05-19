@@ -14,20 +14,30 @@ class UI:
         self.screen_dimension = screen_dimension
         self.menu_input = menu_input
         self.save = save
+        self.language = self.save.file_info['language']
         self.audio = audio
         self.ending_index = 0
         self.state = 'map' # initial state is level for now
         self.main_menu = 'map menu' # default main menu
-        self.home_text = 'Appuie sur [enter]'
-        self.level_tuto_text = {2 : '[U] Annuler', 3 : '[U] Annuler', 15 : '[I] Changer', 41 : '[I] Changer'}
-        self.map_text = ['[enter] selectionner', '[P] pause']
-        self.level_text = '[P] pause'
+        self.home_text = {'fr':'Appuie sur [enter]','eng':'Press [enter]'}
+        self.level_tuto_text = {
+            2:  {'fr': '[U] Annuler', 'eng': '[U] Cancel'},
+            3:  {'fr': '[U] Annuler', 'eng': '[U] Cancel'},
+            15: {'fr': '[I] Changer', 'eng': '[I] Change'},
+            41: {'fr': '[I] Changer', 'eng': '[I] Change'},
+        }
+        self.map_text = [
+            {'fr': '[enter] Selectionner', 'eng': '[enter] Select'},
+            {'fr': '[P] Pause',            'eng': '[P] Pause'},
+        ]
+        self.level_text = '[P] Pause'
         self.ending_text_1 = ["Les défis ne font que commencer...","","","","","","","","","","", "Merci d'avoir joué!"]
         self.ending_text_2 = ["","","Ils vous remercient infiniment!","","","Tout les nébulons sont unis","Grâce à vous","","","","", "Félicitation!"]
         self.level_options = ['Continuer', 'Recommencer', 'Indice', 'Options', 'Quitter Niveau']
         self.map_options = ['Continuer', 'Tablettes', 'Options', 'Charger Partie', 'Quitter Jeu']
         self.setting_options = ['Plein Ecran [F]', 'Grille [G]', 'Tremblement [T]', 'Musique [M]', 'Effets Sonores [N]']
         self.action_options = ['Haut [W]', 'Bas [S]', 'Gauche [A]', 'Droite [D]', 'Annuler : [U]', 'Changer : [I]']
+        #self.action_options = {'fr':['Haut [W]', 'Bas [S]', 'Gauche [A]', 'Droite [D]', 'Annuler : [U]', 'Changer : [I]'],'en':['Haut [W]', 'Bas [S]', 'Gauche [A]', 'Droite [D]', 'Annuler : [U]', 'Changer : [I]']}
         self.tablet_options = ['01', '02', '03', '04', '05', '06', '07', '08']
 
 
@@ -210,7 +220,7 @@ class UI:
         base_display.center = (self.screen_dimension.width / 2, self.screen_dimension.height / 2)
 
         # check for heigt
-        text = TEXT_HINT[stage]
+        text = TEXT_HINT[stage]#[language]
         required_height = self.get_text_height_hint(base_display, text)
         base_display.height = required_height + 2 * TEXT_SETTINGS["padding_y"]
         base_display.center = (self.screen_dimension.width / 2, self.screen_dimension.height / 2)
@@ -302,7 +312,7 @@ class UI:
         x = rect.centerx
         y = rect.top + rect.height / (10)
         color = COLORS['white']
-        name = self.home_text
+        name = self.home_text[self.language]
         text_surf = self.font.render(name, True, color)
         text_rect = text_surf.get_frect(center = (x,y))
         if rect.collidepoint(text_rect.center):
@@ -318,7 +328,7 @@ class UI:
             x = rect.centerx
             y = rect.top + rect.height / (10) + rect.height / 5 * i
             color = COLORS['white']
-            name = self.map_text[i]
+            name = self.map_text[i][self.language]
 
 
             text_surf = self.font.render(name, True, color)
@@ -376,7 +386,7 @@ class UI:
         x = rect.centerx
         y = rect.top + rect.height / (10)
         color = COLORS['white']
-        name = self.level_tuto_text[level_num]
+        name = self.level_tuto_text[level_num][self.language]
         text_surf = self.font.render(name, True, color)
         text_rect = text_surf.get_frect(center = (x,y))
         if rect.collidepoint(text_rect.center):
@@ -568,6 +578,7 @@ class UI:
         return total_height
 
     def update(self):
+        self.language = self.save.file_info['language']
         if self.open_index == 1:
             self.input()
 

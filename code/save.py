@@ -16,6 +16,7 @@ class Save:
         os.makedirs('data', exist_ok=True)
 
         self._default_info_template = {
+            'language': 'fr',
             'grid': True,
             'shake': True,
             'icon_pos': '[576, 704]',
@@ -47,8 +48,9 @@ class Save:
             self.info = clean
             self.save_to_disk()  # single, explicit write of the blank save
 
-        # 4) Normalize in-memory and update (no extra writes needed)
-        self._normalize_structure()
+        # 4) Normalize in-memory; persist if anything was back-filled
+        if self._normalize_structure():
+            self.save_to_disk()
         self.update()
 
     # ---------- PUBLIC ----------
@@ -77,8 +79,18 @@ class Save:
                 self.save_to_disk()
 
     def _normalize_structure(self):
+        changed = False
         if self.info.get('current_file') not in SAVE_FILES:
             self.info['current_file'] = SAVE_FILES[0]
+            changed = True
         for key in SAVE_FILES:
             if key not in self.info or not isinstance(self.info[key], dict):
                 self.info[key] = self._new_slot()
+                changed = True
+            else:
+                # Fill in any keys added to the template that old saves are missing
+                for k, v in self._default_info_template.items():
+                    if k not in self.info[key]:
+                        self.info[key][k] = v
+                        changed = True
+        return changed

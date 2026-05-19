@@ -37,7 +37,10 @@ DESTROYED_X, DESTROYED_Y = 192, 1408
 
 
 SAVE_FILES = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+SAVE_FILE_NAMES = {'fr':['Partie 1', 'Partie 2', 'Partie 3', 'Partie 4', 'Partie 5'],
+                   'eng':['Save 1', 'Save 2', 'Save 3', 'Save 4', 'Save 5']}
 SAVE_FILE_NAMES = ['Partie 1', 'Partie 2', 'Partie 3', 'Partie 4', 'Partie 5']
+
 
 # for tablets
 TEXT_SETTINGS = {
@@ -50,7 +53,7 @@ TEXT_SETTINGS = {
 }
 
 TEXT_HINT = {
-    0: """Boite sur batterie droite pour la premiere pousser a gauche pour deuxieme""",
+    0: """Niveau 0   1- Acceder à la boite en se positionnant sous la batterie de gauche   2- Pousser la boite pour qu'elle soit directement sur la batterie de droite   3- Collecter la batterie de gauche   4- Pousser la boite et collecter la batterie de droite ainsi que la tablette""",
     1: """Niveau 1  Le nebulon se déplace dans une direction jusqu’à ce qu’il fonce dans un mur""",
     2: """Niveau 2  Lorsque le nebulon collecte la dernière batterie, il gagne assez d’énergie pour détruire les blocs""",
     3: """Niveau 3  L’ordre de collection des batteries est tout le temps important""",
@@ -58,7 +61,7 @@ TEXT_HINT = {
     5: """Niveau 5  Certains endroits deviennent inaccessibles après certains déplacements""",
     6: """Niveau 6  L’ordre de collection est important""",
     7: """Niveau 7  Certains endroits deviennent inaccessibles dès le premier déplacement""",
-    8: """Niveau 8  Une boîte est utile quand le nebulon entre en contact avec celle-ci, elle aide à accéder à des endroits auparavant inaccessibles.""",
+    8: """Niveau 8  Une boîte est utile quand le nebulon entre en contact avec celle-ci, elle aide à accéder à des endroits auparavant inaccessibles""",
     9: """Niveau 9  Une boîte est arrêtée par une batterie, cela peut être utilisé pour gagner accès d'autres zones du niveaux""",
     10: """Niveau 10  Les piques révèlent parfois la sortie""",
     11: """Niveau 11  Il y a une grande boucle dont il est impossible de sortir une fois à l’intérieur, il faut y entrer pour la dernière batterie seulement""",
@@ -90,9 +93,11 @@ TEXT_HINT = {
     37: """Niveau 37  Les solidifications montrent le chemin de la boîte""",            #Les solidifications montrent le chemin de la boîte       
     38: """Niveau 38  Les solidifications montrent le chemin de la boîte""",                      #Les solidifications montrent le chemin de la boîte
     39: """Niveau 39  Les solidifications montrent le chemin de la boîte""",                                  #Les solidifications montrent le chemin de la boîte
-    40: """Niveau 40  Place la boite dans le coin permet de se rendre en haut""",               #Les solidifications montrent le chemin de la boîte 
-    70: """Pousser boite à droite, à gauche et en bas"""
+    40: """Niveau 40  Placer la boite à l'endroit initial du premier nebulon permet de se rendre en haut""",               #Les solidifications montrent le chemin de la boîte 
+    70: """Pousser la boite à droite, à gauche puis vers le bas"""
 }
+
+#TEXT_HINT_ENGLISH
 
 TEXT_TABLETS = [
     """Cette nébuleuse aux motifs infinis me fascine bien plus que l’étrange structure qui me contient.  Les étoiles scintillent d’un éclat sublime, certes, mais c’est le silence entre elles qui m’appelle.  Des filaments d’obscurité s’étirent et se contractent, comme si le néant écrivait, lentement, une histoire que je ne comprends pas encore.  Et j’ai foi qu’en fuyant cette cellule, je finirai par lire ce qui m’est destiné.  -Androme""",
