@@ -31,13 +31,18 @@ class UI:
             {'fr': '[P] Pause',            'eng': '[P] Pause'},
         ]
         self.level_text = '[P] Pause'
-        self.ending_text_1 = ["Les défis ne font que commencer...","","","","","","","","","","", "Merci d'avoir joué!"]
-        self.ending_text_2 = ["","","Ils vous remercient infiniment!","","","Tout les nébulons sont unis","Grâce à vous","","","","", "Félicitation!"]
-        self.level_options = ['Continuer', 'Recommencer', 'Indice', 'Options', 'Quitter Niveau']
-        self.map_options = ['Continuer', 'Tablettes', 'Options', 'Charger Partie', 'Quitter Jeu']
-        self.setting_options = ['Plein Ecran [F]', 'Grille [G]', 'Tremblement [T]', 'Musique [M]', 'Effets Sonores [N]']
-        self.action_options = ['Haut [W]', 'Bas [S]', 'Gauche [A]', 'Droite [D]', 'Annuler : [U]', 'Changer : [I]']
-        #self.action_options = {'fr':['Haut [W]', 'Bas [S]', 'Gauche [A]', 'Droite [D]', 'Annuler : [U]', 'Changer : [I]'],'en':['Haut [W]', 'Bas [S]', 'Gauche [A]', 'Droite [D]', 'Annuler : [U]', 'Changer : [I]']}
+        self.ending_text_1 = {'fr':["Les défis ne font que commencer...","","","","","","","","","","", "Merci d'avoir joué!"], 
+                              'eng':["Challenges are only begenning...","","","","","","","","","","", "Thank you for playing!"]}
+        self.ending_text_2 = {'fr':["","","Ils vous remercient infiniment!","","","Tout les nébulons sont unis","Grâce à vous","","","","", "Félicitation!"],
+                                'eng':[["","","They thank you infinitely!","","","All nebulons are united","Thanks to you","","","","", "Congratulations!"]]}
+        self.level_options = {'fr':['Continuer', 'Recommencer', 'Indice', 'Options', 'Quitter Niveau'],
+                              'eng':['Continue', 'Restart', 'Hint', 'Options', 'Quit Level']}
+        self.map_options = {'fr':['Continuer', 'Tablettes', 'Options', 'Charger Partie', 'Quitter Jeu'],
+                            'eng':['Continue', 'Tablets', 'Options', 'Load File', 'Quit Game']}
+        self.setting_options = {'fr':['Plein Ecran [F]', 'Grille [G]', 'Tremblement [T]', 'Musique', 'Langue'],
+                                'eng':['Full Screen [F]', 'Grid [G]', 'Shake [T]', 'Music', 'Language']}
+        self.action_options = {'fr':['Haut [W]', 'Bas [S]', 'Gauche [A]', 'Droite [D]', 'Annuler : [U]', 'Changer : [I]'], # unused
+                               'eng':['Up [W]', 'Down [S]', 'Left [A]', 'Right [D]', 'Undo : [U]', 'Change : [I]']}
         self.tablet_options = ['01', '02', '03', '04', '05', '06', '07', '08']
 
 
@@ -46,7 +51,7 @@ class UI:
         previous_index = self.switch_index
         back_flag = True
         if self.state == 'file':
-            self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(SAVE_FILE_NAMES)
+            self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(SAVE_FILE_NAMES[self.language])
 
             if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
                 self.menu_input(self.state) 
@@ -58,7 +63,7 @@ class UI:
                 back_flag = False
 
         elif self.state == 'tablet':
-            self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(TEXT_TABLETS)
+            self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(TEXT_TABLETS[self.language])
             if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
                 self.state = 'map'
                 self.open_index = 0
@@ -77,7 +82,7 @@ class UI:
                 back_flag = False
 
         elif self.state == 'options':
-            self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(self.setting_options)
+            self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(self.setting_options[self.language])
             if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
                 self.menu_input(self.state)
             elif keys[pygame.K_BACKSPACE] and self.main_menu == 'map menu':
@@ -91,7 +96,7 @@ class UI:
 
         elif self.state == 'map':
             self.main_menu = 'map menu'
-            self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(self.map_options)
+            self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(self.map_options[self.language])
             if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
                 self.menu_input(self.state)
             if keys[pygame.K_BACKSPACE] and back_flag:
@@ -99,7 +104,7 @@ class UI:
 
         elif self.state == 'level':
             self.main_menu = 'level menu'
-            self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(self.level_options)
+            self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(self.level_options[self.language])
             if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
                 self.menu_input(self.state)
             elif keys[pygame.K_BACKSPACE] and back_flag:
@@ -122,11 +127,11 @@ class UI:
 
         # menu
         v_offset = 0 if self.switch_index < 5 else -(self.switch_index - 3) * rect.height / 5
-        for i in range(len(self.level_options)):
+        for i in range(len(self.level_options[self.language])):
             x = rect.centerx
             y = rect.top + rect.height / (10) + rect.height / 5 * i + v_offset
             color = COLORS['white'] if i == self.switch_index else COLORS['gray']
-            name = self.level_options[i]
+            name = self.level_options[self.language][i]
 
 
             text_surf = self.font.render(name, True, color)
@@ -143,11 +148,11 @@ class UI:
 
         # menu
         v_offset = 0 if self.switch_index < 5 else -(self.switch_index - 3) * rect.height / 5
-        for i in range(len(self.map_options)):
+        for i in range(len(self.map_options[self.language])):
             x = rect.centerx
             y = rect.top + rect.height / (10) + rect.height / 5 * i + v_offset
             color = COLORS['white'] if i == self.switch_index else COLORS['gray']
-            name = self.map_options[i]
+            name = self.map_options[self.language][i]
 
 
             text_surf = self.font.render(name, True, color)
@@ -164,11 +169,11 @@ class UI:
 
         # menu
         v_offset = 0 if self.switch_index < 5 else -(self.switch_index - 3) * rect.height / 5
-        for i in range(len(SAVE_FILE_NAMES)):
+        for i in range(len(SAVE_FILE_NAMES[self.language])):
             x = rect.centerx
             y = rect.top + rect.height / (10) + rect.height / 5 * i + v_offset
             color = COLORS['white'] if i == self.switch_index else COLORS['gray']
-            name = SAVE_FILE_NAMES[i]
+            name = SAVE_FILE_NAMES[self.language][i]
 
 
             text_surf = self.font.render(name, True, color)
@@ -202,7 +207,7 @@ class UI:
         base_display.center = (self.screen_dimension.width / 2 + 200, self.screen_dimension.height / 2)
 
         # check for height
-        text = TEXT_TABLETS[self.switch_index]
+        text = TEXT_TABLETS[self.language][self.switch_index]
         required_height = self.get_text_height_tablet(base_display, text)
         if required_height > base_display.height and self.switch_index < self.tablet_collected: # change needed
             base_display.height = required_height + 2 * TEXT_SETTINGS["padding_y"]
@@ -220,7 +225,7 @@ class UI:
         base_display.center = (self.screen_dimension.width / 2, self.screen_dimension.height / 2)
 
         # check for heigt
-        text = TEXT_HINT[stage]#[language]
+        text = TEXT_HINT[self.language][stage]
         required_height = self.get_text_height_hint(base_display, text)
         base_display.height = required_height + 2 * TEXT_SETTINGS["padding_y"]
         base_display.center = (self.screen_dimension.width / 2, self.screen_dimension.height / 2)
@@ -260,12 +265,12 @@ class UI:
         pygame.draw.rect(self.display_surface, COLORS['gray'], rect, 5)
 
         # menu
-        v_offset = 0 if self.switch_index < 5 else -(self.switch_index - 3) * rect.height / 5
-        for i in range(len(self.setting_options)):
+        v_offset = 0 if self.switch_index < 5 else -(self.switch_index - 3) * rect.height / 5 
+        for i in range(len(self.setting_options[self.language])):
             x = rect.centerx
             y = rect.top + rect.height / (10) + rect.height / 5 * i + v_offset
             color = COLORS['white'] if i == self.switch_index else COLORS['gray']
-            name = self.setting_options[i]
+            name = self.setting_options[self.language][i]
 
 
             text_surf = self.font.render(name, True, color)
@@ -324,7 +329,7 @@ class UI:
         rect.center = (self.screen_dimension.width - 180, 120) # pos set to center screen
 
         # menu
-        for i in range(len(self.map_text)):
+        for i in range(len(self.map_text)): # work but only because its range is also 2
             x = rect.centerx
             y = rect.top + rect.height / (10) + rect.height / 5 * i
             color = COLORS['white']
@@ -353,9 +358,9 @@ class UI:
 
     def ending_info(self, dt, ending_num):
         if ending_num == 1:
-            ending_text = self.ending_text_1
+            ending_text = self.ending_text_1[self.language]
         else:
-            ending_text = self.ending_text_2
+            ending_text = self.ending_text_2[self.language]
 
         # Font settings
         ending_font = pygame.font.Font(join(BASE_PATH, "data", "font_b.ttf"), 50)
@@ -398,9 +403,9 @@ class UI:
 
         # Get text based on whether the tablet has been collected
         if self.switch_index < self.tablet_collected:
-            text = TEXT_TABLETS[self.switch_index]
+            text = TEXT_TABLETS[self.language][self.switch_index]
         else:
-            #text = TEXT_TABLETS[self.switch_index]
+            #text = TEXT_TABLETS[self.language][self.switch_index]
             text_surface = font.render("???", True, TEXT_SETTINGS["text_color"])
             text_rect = text_surface.get_rect(center=rect.center)
             self.display_surface.blit(text_surface, text_rect)
@@ -437,7 +442,7 @@ class UI:
 
         # Récupère le texte selon l’état de la tablette
         if self.switch_index < self.tablet_collected:
-            text = TEXT_TABLETS[self.switch_index]
+            text = TEXT_TABLETS[self.language][self.switch_index]
         else:
             text_surface = font.render("???", True, TEXT_SETTINGS["text_color"])
             text_rect = text_surface.get_rect(center=rect.center)
@@ -477,7 +482,7 @@ class UI:
         rect = display
     
         #stage = self.get_stage()
-        text = TEXT_HINT[stage]
+        text = TEXT_HINT[self.language][stage]
     
         sentences = [s.strip() + '  ' for s in text.split('  ') if s.strip()]
         line_height = font.get_height() + TEXT_SETTINGS["line_spacing"]
@@ -520,7 +525,7 @@ class UI:
         font = pygame.font.Font(TEXT_SETTINGS["font_name"], TEXT_SETTINGS["font_size"])
 
         if self.switch_index < self.tablet_collected:
-            text = TEXT_TABLETS[self.switch_index]
+            text = TEXT_TABLETS[self.language][self.switch_index]
         else:
             return font.get_height()
 

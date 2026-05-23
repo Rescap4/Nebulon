@@ -167,7 +167,7 @@ class Game:
         elif target == 'cutscene':
             ending_num = self.current_stage.cutscene_index
             self.current_stage = Cutscene(getattr(self, f"tmx_ending_{ending_num}"), self.save, self.data, self.cutscene_frames, self.audio, self.switch_level, self.screen_dimension, ending_num)
-            self.ui.scrolling_text_y_positions = [-1600 + i * 150 for i in range(len(self.ui.ending_text_1))] # reset it
+            self.ui.scrolling_text_y_positions = [-1600 + i * 150 for i in range(len(self.ui.ending_text_1[self.ui.language]))] # reset it
             self.audio.stop_loop()
 
         else: # overworld
@@ -246,22 +246,22 @@ class Game:
         if isinstance(self.current_stage, Overworld): 
             if self.ui.state == 'map':
                 map_flag = False
-                match self.ui.map_options[self.ui.switch_index]:
-                    case 'Continuer':
+                match self.ui.switch_index:
+                    case 0: # continue
                         self.ui.open_index = 0
-                    case 'Charger Partie':
+                    case 1: # tablet
+                        self.tablet_count()
+                        self.ui.state = 'tablet'
+                        self.ui.switch_index = 0
+                    case 2: # options
+                        self.ui.state = 'options'
+                        self.ui.switch_index = 0
+                    case 3: # change file
                         self.ui.open_index = 0
                         self.ui.state = 'file'
                         self.ui.open_index = 1
                         self.ui.switch_index = 0
-                    case 'Tablettes':
-                        self.tablet_count()
-                        self.ui.state = 'tablet'
-                        self.ui.switch_index = 0
-                    case 'Options':
-                        self.ui.state = 'options'
-                        self.ui.switch_index = 0
-                    case 'Quitter Jeu':
+                    case 4: # quit game
                         self.ui.open_index = 0
                         self.running = False
 
@@ -281,22 +281,22 @@ class Game:
         elif isinstance(self.current_stage, Level):
             if self.ui.state == 'level':
                 level_flag = False
-                match self.ui.level_options[self.ui.switch_index]:
-                    case 'Continuer':
+                match self.ui.switch_index:
+                    case 0: # continue
                         self.ui.open_index = 0
-                    case 'Recommencer': 
+                    case 1: # restart
                         self.ui.open_index = 0
                         self.switch_level('level', self.screen_dimension)
-                    case 'Quitter Niveau': 
+                    case 2: # hint
+                        self.ui.state = 'indice'
+                        self.ui.switch_index = 0
+                    case 3: # options
+                        self.ui.state = 'options'
+                        self.ui.switch_index = 0
+                    case 4: # overworld
                         self.switch_level('overworld', 0)
                         self.ui.state = 'map'
                         self.ui.open_index = 0
-                    case 'Indice':
-                        self.ui.state = 'indice'
-                        self.ui.switch_index = 0
-                    case 'Options':
-                        self.ui.state = 'options'
-                        self.ui.switch_index = 0
 
             elif self.ui.state == 'options' and level_flag:
                     self.option_trigger()
@@ -306,17 +306,19 @@ class Game:
 
     def option_trigger(self):
         # include a sound to show that it worked
-        match self.ui.setting_options[self.ui.switch_index]:
-            case 'Plein Ecran [F]':
+        match self.ui.switch_index:
+            case 0: # full screen
                 self.full_screen()
-            case 'Grille [G]':
+            case 1: # gid
                 self.save.file_info['grid'] = not self.save.file_info['grid']
-            case 'Tremblement [T]':
+            case 2: # shake
                 self.save.file_info['shake'] = not self.save.file_info['shake']
-            case 'Musique [M]':
+            case 3: # music
                 self.toggle_music()
-            case 'Effets Sonores [N]':
-                self.ui.open_index = 0
+            #case 4: # sound effect # replaced with language
+            #    self.toggle_sound()
+            case 4: # language
+                self.change_language()
 
     def activate_pause(self):
         #self.audio.stop_sfx()
@@ -405,6 +407,12 @@ class Game:
             self.audio.mute_looped()
             self.audio.mute_sfx()
 
+    def change_language(self):
+        if self.ui.language == 'fr':
+            self.save.file_info['language'] = 'eng'
+        else:
+            self.save.file_info['language'] = 'fr'
+
     def dimension_check(self):
         if self.is_full_screen:
             self.current_stage.camera = self.current_stage.camera2
@@ -426,11 +434,13 @@ class Game:
                 self.activate_pause()
             if keys[pygame.K_f]:
                 self.full_screen()
-            if keys[pygame.K_m]:
-                self.toggle_music()
-            if keys[pygame.K_n]:
-                self.toggle_sound()
-        
+            #if keys[pygame.K_m]:
+            #    self.toggle_music()
+            #if keys[pygame.K_n]:
+            #    self.toggle_sound()
+            #if keys[pygame.K_l]:
+            #    self.change_language()
+
             self.current_stage.run(dt)
             self.load_level()
             self.ui.update()

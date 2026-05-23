@@ -39,7 +39,6 @@ DESTROYED_X, DESTROYED_Y = 192, 1408
 SAVE_FILES = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 SAVE_FILE_NAMES = {'fr':['Partie 1', 'Partie 2', 'Partie 3', 'Partie 4', 'Partie 5'],
                    'eng':['Save 1', 'Save 2', 'Save 3', 'Save 4', 'Save 5']}
-SAVE_FILE_NAMES = ['Partie 1', 'Partie 2', 'Partie 3', 'Partie 4', 'Partie 5']
 
 
 # for tablets
@@ -52,7 +51,7 @@ TEXT_SETTINGS = {
     "line_spacing": 10,  # Extra space between each line
 }
 
-TEXT_HINT = {
+TEXT_HINT = {'fr':{
     0: """Niveau 0   1- Acceder à la boite en se positionnant sous la batterie de gauche   2- Pousser la boite pour qu'elle soit directement sur la batterie de droite   3- Collecter la batterie de gauche   4- Pousser la boite et collecter la batterie de droite ainsi que la tablette""",
     1: """Niveau 1  Le nebulon se déplace dans une direction jusqu’à ce qu’il fonce dans un mur""",
     2: """Niveau 2  Lorsque le nebulon collecte la dernière batterie, il gagne assez d’énergie pour détruire les blocs""",
@@ -94,12 +93,55 @@ TEXT_HINT = {
     38: """Niveau 38  Les solidifications montrent le chemin de la boîte""",                      #Les solidifications montrent le chemin de la boîte
     39: """Niveau 39  Les solidifications montrent le chemin de la boîte""",                                  #Les solidifications montrent le chemin de la boîte
     40: """Niveau 40  Placer la boite à l'endroit initial du premier nebulon permet de se rendre en haut""",               #Les solidifications montrent le chemin de la boîte 
-    70: """Pousser la boite à droite, à gauche puis vers le bas"""
-}
+    70: """Pousser la boite à droite, à gauche puis vers le bas"""},
+    'eng': {
+    0: """Level 0   1- Reach the box by positioning yourself under the left battery   2- Push the box so it sits directly on the right battery   3- Collect the left battery   4- Push the box and collect the right battery along with the tablet""",
+    1: """Level 1  The nebulon moves in a direction until it hits a wall""",
+    2: """Level 2  When the nebulon collects the last battery, it gains enough energy to destroy blocks""",
+    3: """Level 3  The order in which batteries are collected always matters""",
+    4: """Level 4  Some areas become inaccessible after certain moves""",
+    5: """Level 5  Some areas become inaccessible after certain moves""",
+    6: """Level 6  Collection order matters""",
+    7: """Level 7  Some areas become inaccessible from the very first move""",
+    8: """Level 8  A box is useful when the nebulon makes contact with it; it helps reach previously inaccessible areas""",
+    9: """Level 9  A box is stopped by a battery; this can be used to gain access to other areas of the level""",
+    10: """Level 10  Spikes sometimes reveal the exit""",
+    11: """Level 11  There is a large loop that is impossible to escape once inside; only enter it for the last battery""",
+    12: """Level 12  One box is indestructible""",
+    13: """Level 13  A box always stops the nebulon, regardless of its energy""",
+    14: """Level 14  Even at full energy, a nebulon cannot push a box against a wall""",
+    15: """Level 15  Both nebulons want to exit; dead ends can be blocked using the inactive nebulon""",
+    16: """Level 16  It is possible to form a ladder with two nebulons to reach almost anywhere""",
+    17: """Level 17  Like a box, an inactive nebulon always stops the active one""",
+    18: """Level 18  Two nebulons must always collaborate until they can both exit""",
+    19: """Level 19  If a block exists, it exists for a reason""",
+    20: """Level 20  If a nebulon has space above and below, going down then up stops it at the same spot as going straight up""",
+    21: """Level 21  Position one nebulon to the right before positioning the one on the left""",
+    22: """Level 22  Use both nebulons until one can enter the crevice""",
+    23: """Level 23  Starting from the side closest to the exit doesn't work because the crevices prevent the nebulons from helping each other""",
+    24: """Level 24  All green tablets are optional; to exit, one nebulon must access the right section to help the other join it""",
+    25: """Level 25  Like a box, the inactive nebulon is stopped by a battery, except it can come back and push the pusher""",
+    26: """Level 26  Avoid destroying certain green blocks; some are needed to position both boxes""",
+    27: """Level 27  Place the boxes to create an exit path after collecting the last battery""",
+    28: """Level 28  Getting from left to right requires four consecutive collisions with the three boxes""",
+    29: """Level 29  Try collecting each battery first to determine the order""",
+    30: """Level 30  Destroy the blocks, then the top of the column, then the rest of the column""",
+    31: """Level 31  Reaching the other end one tile at a time requires staying next to the spikes""",
+    32: """Level 32  Pushing the other nebulon is done at least four times; it is essential to save both""",
+    33: """Level 33  With two nebulons, it is possible to position a box almost anywhere""",
+    34: """Level 34  Always try to figure out which battery must be collected last, then explore the rest of the level""",
+    35: """Level 35  To align two nebulons, two surfaces are needed; a box counts as a surface""",
+    36: """Level 36  The solidifications show the path of the box""",
+    37: """Level 37  The solidifications show the path of the box""",
+    38: """Level 38  The solidifications show the path of the box""",
+    39: """Level 39  The solidifications show the path of the box""",
+    40: """Level 40  Placing the box at the starting position of the first nebulon allows reaching the top""",
+    70: """Push the box to the right, to the left, then downward""",
+}}
 
 #TEXT_HINT_ENGLISH
 
-TEXT_TABLETS = [
+TEXT_TABLETS = {'fr':[
     """Cette nébuleuse aux motifs infinis me fascine bien plus que l’étrange structure qui me contient.  Les étoiles scintillent d’un éclat sublime, certes, mais c’est le silence entre elles qui m’appelle.  Des filaments d’obscurité s’étirent et se contractent, comme si le néant écrivait, lentement, une histoire que je ne comprends pas encore.  Et j’ai foi qu’en fuyant cette cellule, je finirai par lire ce qui m’est destiné.  -Androme""",
 
     """Je ne suis pas unique! Cassyn et Itar ont communiqué avec moi par voies ondulatoires.  Ils m’ont fait comprendre que je suis mieux d’attendre le signal avant de sortir de ma cellule.  Depuis que je suis un Communicant, mes boulons ne font que tourner. J’ai trop de questions auxquelles ils n’ont pas la réponse.  Je réalise que je ne connais rien de rien et cela m’excite!  -Androme
@@ -120,7 +162,30 @@ TEXT_TABLETS = [
 """,
 
     """Maintenant que nous sommes unis, la preuve de l’Intelligent s’avère erronée, les filaments limites semblent se répéter dû à la résonance de nos ondulations.  Nous ne pouvons rien conclure sur la taille de la nébuleuse, mais le concept de vérité locale m’a profondément séduit.  Il nous octroie un véritable pouvoir sur ce qui nous est inatteignable tant que nous cherchons à élargir les frontières de notre savoir.  Mais surtout, elle nous aide à comprendre nos voisins.  En admettant que des parties de nos vérités diffèrent dû à nos vécus, il devient simple d’admirer la complexité et la diversité de chacun.  -Androme
-"""
-]
+"""],
+
+'eng':[
+    """This nebula, with its infinite patterns, fascinates me far more than the strange structure that contains me.  It is true that the stars shimmer with sublime brilliance, but it is the silence between them that calls me.  Filaments of darkness stretch and shrink, as though the void itself were writing, slowly, a story I do not yet understand.  And I have faith that by fleeing this cell, I will one day read what is destined for me.  -Androme""",
+
+    """I am not unique! Cassyn and Itar have communicated with me by resonant waves.  They made me understand that I'd better wait for the signal before leaving my cell.  My bolts have been spinning since I became a Communicant. I have too many questions they cannot answer.  I realize I know nothing at all. And that excites me!  -Androme
+""",
+
+    """The Great Bang is our mission, and it unfolds in two phases.  First, we must communicate with every Ignorant.  Then, we must all leave our structures in a specific order and at a precise moment.  The final goal is to collide with one another at the center of the nebula. The Intelligent has proven this is possible.  However, he wishes to confirm that the universe is not infinite before moving forward.  His plan gives purpose to all Communicants, and all are working toward it with conviction.  -Androme""",
+
+    """If we are all confined within these structures, it is because the Creator has decreed it so.  He is the holder of the Truth, and his grand design knows neither chance nor error.  He forged us in oblivion, initially isolated and devoid of awareness, to see if, over eternity, simple beings might rise toward the Truth.  The Great Bang will guide us toward our awakening.  -Androme
+""",
+
+    """The nebula is infinite. The boundary filaments repeat endlessly. The Intelligent has just proved it.  Since then, chaos reigns. Our systems, beliefs, and emotions collapse.  Infinity means that all that is fundamentally possible exists. There exists an infinity of nebulons simply because, in certain places, matter assembled this way.  And with an infinite number of Ignorants, the Great Bang loses its meaning. The feeling of being stripped of all knowledge engulfs me. Should I even keep my role as a scribe?  -Androme
+""",
+
+    """We believed in a Creator, because he gave meaning to our origin. We believed in the Truth, because it showed us a direction.  Yet in an infinite nebula, our origin is merely statistical, and our direction is unfortunately static.  As we entered the second phase of the Great Bang, most chose denial.  But I find myself questioning the very existence of the other nebulons. Perhaps I have been communicating with a random arrangement of cosmic waves from the beginning.  I feel far more alone now than when I was Ignorant. I envy my copy who was never contacted.  -Androme
+""",
+
+    """Though objective constants surely exist within the nebula, infinity forbids an absolute Truth. By definition, what is true becomes false an infinity away.  My solution: local truths.  The only truth I possess is my own, the one founded on my experiments and the truths of my peers. My truth grows whenever one of my questions finds an answer.  Yet I strongly sense that some will remain unanswered.  Thus, I have chosen that the Creator exists in a form that does not contradict my truth.  And if you can prove me otherwise, then I will gladly learn, because my truth is malleable.  -Zaurion
+""",
+
+    """Now that we are united, the Intelligent's proof appears flawed. The boundary filaments only seem to repeat because of the resonance of our waves.  We cannot conclude anything about the nebula's size, but the concept of local truth has deeply captivated me.  It grants us real power over what remains beyond reach, so long as we strive to expand the frontiers of our understanding.  But above all, it helps us comprehend our neighbors.  By accepting that parts of our truths differ because of our experiences, it becomes simple to admire the complexity and diversity of each other.  -Androme
+"""],
+}
 
 
