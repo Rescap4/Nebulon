@@ -62,7 +62,7 @@ class Overworld:
                 self.camera2 = Camera((obj.x, obj.y))
 
         for obj in tmx_map.get_layer_by_name('Entities'):
-            if obj.name == 'Stage'and f'level_{int(obj.properties['level'])}' in self.save.file_info:
+            if obj.name == 'Stage'and f"level_{int(obj.properties['level'])}" in self.save.file_info:
                 if 'color' in obj.properties:
                     self.behind = Ground((obj.x, obj.y), self.ground_surf, self.all_sprites, obj.properties['color'])
                 self.node = Node((obj.x, obj.y), self.node_numbers[int(obj.properties['level'])], (self.all_sprites, self.node_sprites), self.save, self.data, obj.properties['level'])

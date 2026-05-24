@@ -380,6 +380,9 @@ class Game:
                 fs_w = WINDOW_WIDTH
                 fs_h = round(WINDOW_WIDTH * monitor_h / monitor_w)
 
+            fs_w = min(fs_w, 30 * TILE_SIZE)  # cap at 1920
+            fs_h = min(fs_h, 19 * TILE_SIZE)  # cap at 1216
+
             self.screen_dimension = pygame.display.set_mode(
                 (fs_w, fs_h),
                 pygame.FULLSCREEN | pygame.SCALED
