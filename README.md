@@ -1,10 +1,12 @@
 
 
 # Nebulon
-Nebulon is a minimalist puzzle game set in a distant nebula.
-Help some small cube-shaped robots complete their mysterious mission!
+Nebulon is a minimalist but challenging puzzle game set in a distant nebula.
+Help some small cube-shaped robots collect all batteries in their enclosure, 
+they then gain the energy to destroy the walls and are able to escape!
+But where are they all going? Uncover their mysterious mission by discovering hidden tablets of knowledge!
 
-There is more than 40 levels, they all have a solution.
+There are more than 40 levels, they all have a hint accessible in the level menu.
 Progress is automatically saved across up to five save files.
 Run main.py to play (requires Python and Pygame installed).
 
@@ -16,14 +18,17 @@ Run main.py to play (requires Python and Pygame installed).
 - **enter** - Select
 - **backspace** - Return
 
-Toggle on/off options, also accessible from the menu
+## Options ##
+- Language (English/French)
+- Music (Active/Muted)
+
+Toggle on/off options (also accessible by pressing the corresponding key)
 - **F** - Full screen
 - **G** - Grid
 - **T** - Shake screen
-- **M** - Music
-- **N** - Sound effects
 
------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------
 
 ## Credits ##
 
