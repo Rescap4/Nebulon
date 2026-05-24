@@ -193,35 +193,20 @@ class Level:
                 obj.stationnary = True
 
                 x, y = obj.rect.topleft
-                offset_x = x - FULL_OFFSET_X
-                offset_y = y- FULL_OFFSET_Y
-                if self.camera == self.camera2: # is full screen
-                    if obj.hit == 'up':
-                        for i in range(10):
-                            self.impact_particle.add_particles_up(x, y)
-                    if obj.hit == 'down':
-                        for i in range(10):
-                            self.impact_particle.add_particles_down(x, y)
-                    if obj.hit == 'left':
-                        for i in range(10):
-                            self.impact_particle.add_particles_left(x, y)
-                    if obj.hit == 'right':
-                        for i in range(10):
-                            self.impact_particle.add_particles_right(x, y)
-                else:
-                    if obj.hit == 'up':
-                        for i in range(10):
-                            #self.impact_particle.add_particles_up(obj.rect.topleft[0] - FULL_OFFSET_X, obj.rect.topleft[1] - FULL_OFFSET_Y)
-                            self.impact_particle.add_particles_up(offset_x, offset_y)
-                    if obj.hit == 'down':
-                        for i in range(10):
-                            self.impact_particle.add_particles_down(offset_x, offset_y)
-                    if obj.hit == 'left':
-                        for i in range(10):
-                            self.impact_particle.add_particles_left(offset_x, offset_y)
-                    if obj.hit == 'right':
-                        for i in range(10):
-                            self.impact_particle.add_particles_right(offset_x, offset_y)
+                px = x + self.all_sprites.offset.x
+                py = y + self.all_sprites.offset.y + 64
+                if obj.hit == 'up':
+                    for i in range(10):
+                        self.impact_particle.add_particles_up(px, py)
+                if obj.hit == 'down':
+                    for i in range(10):
+                        self.impact_particle.add_particles_down(px, py)
+                if obj.hit == 'left':
+                    for i in range(10):
+                        self.impact_particle.add_particles_left(px, py)
+                if obj.hit == 'right':
+                    for i in range(10):
+                        self.impact_particle.add_particles_right(px, py)
 
     def check_player(self):
         self.activation_order = [player.serial_num for player in sorted(self.player_sprites, key=lambda p: p.serial_num) if player.state != 'outside']
@@ -284,10 +269,10 @@ class Level:
                 player.dead_face.activate()
 
                 # explosion
-                if self.camera == self.camera2: # is full screen
-                    self.explosion_particle.add_particles(player.rect.x + 32, player.rect.y - 32)
-                else:
-                    self.explosion_particle.add_particles(player.rect.x - FULL_OFFSET_X + 32, player.rect.y - FULL_OFFSET_Y - 32)
+                self.explosion_particle.add_particles(
+                    player.rect.x + self.all_sprites.offset.x + 32,
+                    player.rect.y + self.all_sprites.offset.y + 32
+                )
 
 
             if player.state == 'dead' and not self.player_die_timer.active:
@@ -301,10 +286,10 @@ class Level:
                 if battery_collected and player.is_active:
                     
                     for battery in battery_collected:
-                        if self.camera == self.camera2: # is full screen
-                            self.battery_particle.start_sequence((battery.rect.x + 32, battery.rect.y - 32))
-                        else:
-                            self.battery_particle.start_sequence((battery.rect.x - FULL_OFFSET_X + 32, battery.rect.y - FULL_OFFSET_Y - 32))
+                        self.battery_particle.start_sequence((
+                            battery.rect.x + self.all_sprites.offset.x + 32,
+                            battery.rect.y + self.all_sprites.offset.y + 32
+                        ))
 
                         # Teleport the specific battery that was collected
                         battery.rect.x, battery.rect.y = DESTROYED_X, DESTROYED_Y
@@ -325,10 +310,10 @@ class Level:
                     for exit in self.exit_sprites:
                         if exit.rect.colliderect(player):
                             # explosion particle
-                            if self.camera == self.camera2: # is full screen
-                                self.destroy_particle.add_particles(exit.rect.x + 32, exit.rect.y - 32)
-                            else:
-                                self.destroy_particle.add_particles(exit.rect.x - FULL_OFFSET_X + 32, exit.rect.y - FULL_OFFSET_Y - 32)
+                            self.destroy_particle.add_particles(
+                                exit.rect.x + self.all_sprites.offset.x + 32,
+                                exit.rect.y + self.all_sprites.offset.y + 32
+                            )
 
                             player.slowed_flag = True
                             player.old_pos = (player.rect.x, player.rect.y)
@@ -502,16 +487,18 @@ class Level:
     def particle_event(self):
         for player in self.slide_objects:
             if player.direction != [0, 0]:
-                if self.camera == self.camera2: # is full screen
-                    self.slide_particle.add_particles(player.rect.x, player.rect.y, pygame.Color('White'))
-                else:
-                    self.slide_particle.add_particles(player.rect.x - FULL_OFFSET_X, player.rect.y - FULL_OFFSET_Y, pygame.Color('White'))
+                self.slide_particle.add_particles(
+                    player.rect.x + self.all_sprites.offset.x,
+                    player.rect.y + self.all_sprites.offset.y + 64,
+                    pygame.Color('White')
+                )
 
             if player.state == 'awakened':
-                if self.camera == self.camera2: # is full screen
-                    self.awakened_particle.add_particles(player.rect.x, player.rect.y, pygame.Color('White'))
-                else:
-                    self.awakened_particle.add_particles(player.rect.x - FULL_OFFSET_X, player.rect.y - FULL_OFFSET_Y, pygame.Color('White'))
+                self.awakened_particle.add_particles(
+                    player.rect.x + self.all_sprites.offset.x,
+                    player.rect.y + self.all_sprites.offset.y + 64,
+                    pygame.Color('White')
+                )
 
     def input(self):
         keys = pygame.key.get_just_pressed()

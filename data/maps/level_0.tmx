@@ -121,8 +121,8 @@
 </data>
  </layer>
  <objectgroup id="2" name="Entities">
-  <object id="107" name="Player0" type="1" x="768" y="640" width="63.6932" height="63.6932"/>
-  <object id="108" name="Player1" type="1" x="896" y="768" width="63.6932" height="63.6932"/>
+  <object id="107" name="Player0" type="1" x="768" y="704" width="63.6932" height="63.6932"/>
+  <object id="108" name="Player1" type="1" x="896" y="704" width="63.6932" height="63.6932"/>
   <object id="109" name="Box" type="1" x="960" y="576" width="63.6932" height="63.6932"/>
   <object id="110" name="Battery" x="768" y="384" width="63.5" height="63.5"/>
   <object id="111" name="Tablet" x="896" y="320" width="63.5" height="63.5"/>

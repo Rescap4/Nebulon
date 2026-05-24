@@ -18,6 +18,7 @@ class Game:
         pygame.mixer.pre_init(44100, -16, 2, 512)
         pygame.init()
         pygame.mixer.init()
+        pygame.mouse.set_visible(False)
         pygame.display.set_caption('Nebulon')
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.clock = pygame.time.Clock()
@@ -55,7 +56,8 @@ class Game:
         self.sfx_flag = True
 
         self.fade_oppacity = 0
-        self.fade_surf = pygame.Surface(FULL_SCREEN_SIZE)
+        # OLD: self.fade_surf = pygame.Surface(FULL_SCREEN_SIZE)
+        self.fade_surf = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.fade_surf.fill((0,0,0))
         self.fade_surf.set_alpha(0)
 
@@ -168,6 +170,7 @@ class Game:
             ending_num = self.current_stage.cutscene_index
             self.current_stage = Cutscene(getattr(self, f"tmx_ending_{ending_num}"), self.save, self.data, self.cutscene_frames, self.audio, self.switch_level, self.screen_dimension, ending_num)
             self.ui.scrolling_text_y_positions = [-1600 + i * 150 for i in range(len(self.ui.ending_text_1[self.ui.language]))] # reset it
+            self.ui.open_index = 0
             self.audio.stop_loop()
 
         else: # overworld
@@ -357,29 +360,30 @@ class Game:
         self.is_full_screen = not self.is_full_screen
     
         if self.is_full_screen:
-            # Taille du/des bureau(x)
-            try:
-                # pygame-ce: retourne [(w,h), (w,h), ...] 
-                desktop_sizes = getattr(pygame.display, "get_desktop_sizes", None)
-                if callable(desktop_sizes):
-                    w, h = desktop_sizes()[0]
-                else:
-                    # fallback universel
-                    info = pygame.display.Info()
-                    w, h = info.current_w, info.current_h
-    
-                # Essai: plein écran + scaling auto
-                self.screen_dimension = pygame.display.set_mode(
-                    (w, h),
-                    pygame.FULLSCREEN | pygame.SCALED
-                )
-            except pygame.error:
-                # Certains combos drivers/SDL n'aiment pas SCALED en fullscreen
-                # -> on garde le fullscreen natif et on passera au plan B (surface logique + scale) si besoin
-                self.screen_dimension = pygame.display.set_mode(
-                    (w, h),
-                    pygame.FULLSCREEN
-                )
+            # Detect the monitor's native resolution.
+            desktop_sizes = getattr(pygame.display, "get_desktop_sizes", None)
+            if callable(desktop_sizes):
+                monitor_w, monitor_h = desktop_sizes()[0]
+            else:
+                info = pygame.display.Info()
+                monitor_w, monitor_h = info.current_w, info.current_h
+
+            # Compute a logical size that exactly matches the monitor's aspect ratio
+            # so pygame.SCALED fills the screen with zero black bars.
+            # We keep whichever game dimension is the bottleneck and expand the other:
+            # - monitor wider than game  → expand logical width,  keep height
+            # - monitor taller than game → expand logical height, keep width
+            if monitor_w / monitor_h > WINDOW_WIDTH / WINDOW_HEIGHT:
+                fs_w = round(WINDOW_HEIGHT * monitor_w / monitor_h)
+                fs_h = WINDOW_HEIGHT
+            else:
+                fs_w = WINDOW_WIDTH
+                fs_h = round(WINDOW_WIDTH * monitor_h / monitor_w)
+
+            self.screen_dimension = pygame.display.set_mode(
+                (fs_w, fs_h),
+                pygame.FULLSCREEN | pygame.SCALED
+            )
         else:
             # Retour fenêtré avec SCALED
             self.screen_dimension = pygame.display.set_mode(
@@ -414,10 +418,16 @@ class Game:
             self.save.file_info['language'] = 'fr'
 
     def dimension_check(self):
-        if self.is_full_screen:
-            self.current_stage.camera = self.current_stage.camera2
-        else:
-            self.current_stage.camera = self.current_stage.camera1
+        # OLD: switched to camera2 because the fullscreen logical size was 1920×1200,
+        # requiring a different viewport offset to re-center the level content.
+        # if self.is_full_screen:
+        #     self.current_stage.camera = self.current_stage.camera2
+        # else:
+        #     self.current_stage.camera = self.current_stage.camera1
+
+        # NEW: logical size is always WINDOW_WIDTH×WINDOW_HEIGHT, so camera1 is
+        # always correct and the level stays centered in both windowed and fullscreen.
+        self.current_stage.camera = self.current_stage.camera1
 
     def run(self):
         while self.running:

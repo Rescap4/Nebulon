@@ -187,10 +187,11 @@ class Cutscene:
             if nebulon.direction != [0, 0]:
                 x, y = nebulon.rect.x, nebulon.rect.y
 
-                if self.camera == self.camera2:  # Full screen
-                    self.particle2.add_particles(x, y, COLORS['white'])
-                else:
-                    self.particle2.add_particles(x - FULL_OFFSET_X, y - FULL_OFFSET_Y, COLORS['white'])
+                self.particle2.add_particles(
+                    x + self.all_sprites.offset.x,
+                    y + self.all_sprites.offset.y + 64,
+                    COLORS['white']
+                )
 
     def timer_setup(self):
         # general timer
@@ -224,7 +225,7 @@ class Cutscene:
                             nebulon.rect.topleft[1] - self.camera.pos[0])
                 self.display_surface.blit(nebulon.image, nebulon.rect.topleft)
         self.particle1.emit()
-        #self.particle_event_timer.update()
+        self.particle_event_timer.update()
         self.cutscene_timer.update()
 
 

@@ -17,22 +17,24 @@ class AllSprites(pygame.sprite.Group):
         self.add(sprite)
 
     def draw(self, target_pos):
-        # Apply shake effect if active
+        # Use live surface dimensions so the camera re-centers correctly when the
+        # logical size changes between windowed (1408×832) and fullscreen (proportional)
+        neutral_x = -(target_pos[0] - self.display_surface.get_width() / 2)
+        neutral_y = -(target_pos[1] - self.display_surface.get_height() / 2)
+
         if self.shake_timer_right.active:
-            shake_right = 1
-            self.offset.x = -(target_pos[0] - WINDOW_WIDTH / 2) + shake_right
+            self.offset.x = neutral_x + 1
         elif self.shake_timer_left.active:
-            shake_left = -1
-            self.offset.x = -(target_pos[0] - WINDOW_WIDTH / 2) + shake_left
-        elif self.shake_timer_up.active:
-            shake_up = -1
-            self.offset.y = -(target_pos[1] - WINDOW_HEIGHT / 2) + shake_up
-        elif self.shake_timer_down.active:
-            shake_down = 1
-            self.offset.y = -(target_pos[1] - WINDOW_HEIGHT / 2) + shake_down
+            self.offset.x = neutral_x - 1
         else:
-            self.offset.x = -(target_pos[0] - WINDOW_WIDTH / 2)
-            self.offset.y = -(target_pos[1] - WINDOW_HEIGHT / 2)
+            self.offset.x = neutral_x
+
+        if self.shake_timer_up.active:
+            self.offset.y = neutral_y - 1
+        elif self.shake_timer_down.active:
+            self.offset.y = neutral_y + 1
+        else:
+            self.offset.y = neutral_y
 
 
         sorted_sprites = sorted(self.sprites(), key=lambda s: getattr(s, 'z_index', 0))
