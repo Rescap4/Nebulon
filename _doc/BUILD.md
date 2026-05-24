@@ -24,9 +24,13 @@ Nebulon_Game/
 └── data/             (folder for save files)
 ```
 
-##  Play
+## Create an executable ##
 
+To be able to play, run the following commands to build the code into an executable
 ```powershell
+pip install pyinstaller
+pip install pygame-ce
+pip install pytmx
 cd Nebulon_Game
 .\Nebulon.exe
 ```
