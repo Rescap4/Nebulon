@@ -396,6 +396,10 @@ class Game:
     
         self.audio.play_sfx('select_a')
         self.current_stage.background()
+        w, h = self.screen_dimension.get_size()
+        self.fade_surf = pygame.Surface((w, h))
+        self.fade_surf.fill((0, 0, 0))
+        self.fade_surf.set_alpha(self.fade_oppacity)
 
     def toggle_music(self):
         self.music_flag = not self.music_flag

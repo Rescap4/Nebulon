@@ -28,11 +28,8 @@ Toggle on/off options (also accessible by pressing the corresponding key)
 - **T** - Shake screen
 
 ## Requirements to play ##
-- Download and install Python here: 
-<https://www.python.org/downloads/>
-- Install the needed libraries in the terminal
-<pip install pygame-ce>
-<pip install pytmx>
+- Download and install Python here: https://www.python.org/downloads/
+- Install the needed libraries using the commands:  pip install pygame-ce  pip install pytmx
 
 --------------------------------------------------------------------------------------------------
 
