@@ -27,9 +27,13 @@ Toggle on/off options (also accessible by pressing the corresponding key)
 - **G** - Grid
 - **T** - Shake screen
 
-## Requirements to play ##
+## Requirements to run the code ##
 - Download and install Python here: https://www.python.org/downloads/
-- Install the needed libraries using the commands:  pip install pygame-ce  pip install pytmx
+- Install the needed libraries using the commands:
+```
+pip install pygame-ce
+pip install pytmx
+```
 
 --------------------------------------------------------------------------------------------------
 

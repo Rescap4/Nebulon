@@ -125,7 +125,7 @@
   <object id="112" name="Battery" type="1" x="576" y="896" width="63.6932" height="63.6932"/>
   <object id="122" name="Battery" type="1" x="1280" y="896" width="63.6932" height="63.6932"/>
   <object id="117" name="Box" type="1" x="896" y="896" width="63.6932" height="63.6932"/>
-  <object id="113" name="Player1" type="1" x="576" y="640" width="63.6932" height="63.6932"/>
+  <object id="113" name="Player1" type="1" x="576" y="448" width="63.6932" height="63.6932"/>
   <object id="115" name="Spike" x="576" y="1024" width="63.5" height="63.5"/>
   <object id="118" name="Spike" x="1024" y="576" width="63.5" height="63.5"/>
   <object id="123" name="Spike" x="1280" y="448" width="63.5" height="63.5"/>

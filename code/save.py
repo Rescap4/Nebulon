@@ -3,14 +3,13 @@ from settings import *
 import json
 import os
 from os.path import join
-from pathlib import Path
+# from pathlib import Path
 from datetime import datetime
 
 class Save:
     def __init__(self, level_files):
         self.level_files = level_files
-        # Le fichier de sauvegarde est créé à côté de l'exe (répertoire de travail)
-        # Pas dans le dossier temporaire de PyInstaller
+        # Le fichier de sauvegarde est créé à côté de l'exe
         self.save_path = join('data', 'save_file.txt')
         # Créer le dossier data s'il n'existe pas
         os.makedirs('data', exist_ok=True)
@@ -28,32 +27,20 @@ class Save:
             with open(self.save_path, encoding='utf-8') as f:
                 self.info = json.load(f)
 
-        except Exception as e:
-            # 2) Archive raw original BEFORE any write
-            p = Path(self.save_path)
-            try:
-                raw = p.read_text(encoding='utf-8', errors='replace') if p.exists() else '<missing file>'
-            except Exception:
-                raw = '<file unreadable>'
-
-            with open(join('data', 'save_file_backup.txt'), 'a', encoding='utf-8') as archive:
-                archive.write(f"\n--- {datetime.now().isoformat(timespec='seconds')} ---\n")
-                archive.write(f"Error: {repr(e)}\n")
-                archive.write(raw + "\n")
-
-            # 3) Build a full clean base and write it once
+        except Exception:
+            # Build a full clean base and write it once
             clean = {'current_file': SAVE_FILES[0]}
             for key in SAVE_FILES:
                 clean[key] = self._new_slot()
             self.info = clean
             self.save_to_disk()  # single, explicit write of the blank save
 
-        # 4) Normalize in-memory; persist if anything was back-filled
+        # Normalize in-memory; persist if anything was back-filled
         if self._normalize_structure():
             self.save_to_disk()
         self.update()
 
-    # ---------- PUBLIC ----------
+    # public
     def update(self):
         cur = self.info.get('current_file', SAVE_FILES[0])
         if cur not in SAVE_FILES:
@@ -65,6 +52,27 @@ class Save:
         self.file_info = self.info[cur]
 
     def save_to_disk(self):
+        backup_path = join('data', 'save_file_backup.txt')
+
+        # Guide to tell how to recover the file
+        #header = f'# Largest non-corrupted save file was saved {datetime.now().isoformat(timespec="seconds")}\nTo load that file put the following content inside save_file.txt:\n'
+        # Get the JSON-only size of the backup (strip header so comparison is fair)
+        backup_json_size = 0
+        if os.path.exists(backup_path):
+            with open(backup_path, 'r', encoding='utf-8') as f:
+                first_line = f.readline()
+                rest = f.read() if first_line.startswith('Biggest') else first_line + f.read()
+            backup_json_size = len(rest.encode('utf-8'))
+
+        # Only overwrite backup if the current save is at least as large — prevents a
+        # fresh/blank save (created after corruption) from replacing a progressed backup
+        if os.path.exists(self.save_path) and os.path.getsize(self.save_path) >= backup_json_size:
+            with open(self.save_path, 'r', encoding='utf-8') as f:
+                current_content = f.read()
+            with open(backup_path, 'w', encoding='utf-8') as f:
+                #f.write(header)
+                f.write(current_content)
+
         with open(self.save_path, 'w', encoding='utf-8') as f:
             json.dump(self.info, f, indent=4)
 
