@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="79">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="80">
  <tileset firstgid="1" source="../tilesets/tileset_d.tsx"/>
  <objectgroup id="4" name="Triggers">
   <object id="23" name="Camera1" x="960" y="672">
@@ -17,8 +17,9 @@
     <property name="level_unlock" value="2"/>
    </properties>
   </object>
-  <object id="77" name="Tutorial" type="1" x="896" y="576" width="247.693" height="63.6932"/>
+  <object id="77" name="Tutorial" type="1" x="1024" y="576" width="120.693" height="63.6932"/>
   <object id="78" name="Tutorial" type="1" x="1223" y="576" width="121.693" height="126.693"/>
+  <object id="79" name="Tutorial" type="1" x="896" y="576" width="55.6932" height="63.6932"/>
  </objectgroup>
  <layer id="3" name="Decoration" width="30" height="30">
   <data encoding="csv">
