@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="83">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="86">
  <tileset firstgid="1" source="../tilesets/tileset_d.tsx"/>
  <objectgroup id="4" name="Triggers">
   <object id="23" name="Camera1" x="960" y="672">
@@ -17,6 +17,8 @@
     <property name="level_unlock" value="4, 6"/>
    </properties>
   </object>
+  <object id="84" name="Tutorial" type="1" x="1344" y="832" width="63.6932" height="63.6932"/>
+  <object id="85" name="Tutorial" type="1" x="1088" y="448" width="63.6932" height="63.6932"/>
  </objectgroup>
  <layer id="3" name="Decoration" width="30" height="30">
   <data encoding="csv">
@@ -121,12 +123,11 @@
 </data>
  </layer>
  <objectgroup id="2" name="Entities">
-  <object id="41" name="Player0" type="1" x="896" y="640" width="63.6932" height="63.6932"/>
+  <object id="41" name="Player0" type="1" x="960" y="640" width="63.6932" height="63.6932"/>
   <object id="74" name="Battery" x="960" y="768" width="62.4743" height="62.4743"/>
   <object id="75" name="Battery" x="768" y="832" width="62.4743" height="62.4743"/>
   <object id="76" name="Battery" x="832" y="448" width="63.6932" height="63.6932"/>
   <object id="77" name="Spike" x="768" y="448" width="63.5" height="63.5"/>
-  <object id="78" name="Spike" x="1344" y="832" width="63.5" height="63.5"/>
   <object id="79" name="Spike" x="1344" y="768" width="63.5" height="63.5"/>
  </objectgroup>
 </map>

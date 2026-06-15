@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="81">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="83">
  <tileset firstgid="1" source="../tilesets/tileset_d.tsx"/>
  <objectgroup id="4" name="Triggers">
   <object id="23" name="Camera1" x="960" y="672">
@@ -17,6 +17,8 @@
     <property name="level_unlock" value="3"/>
    </properties>
   </object>
+  <object id="81" name="Tutorial" type="1" x="1152" y="512" width="63.6932" height="63.6932"/>
+  <object id="82" name="Tutorial" type="1" x="1152" y="640" width="63.6932" height="193.693"/>
  </objectgroup>
  <layer id="3" name="Decoration" width="30" height="30">
   <data encoding="csv">
@@ -29,9 +31,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,77,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,77,0,0,0,0,0,77,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,77,0,0,0,0,0,77,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -121,9 +123,8 @@
 </data>
  </layer>
  <objectgroup id="2" name="Entities">
-  <object id="41" name="Player0" type="1" x="704" y="768" width="63.6932" height="63.6932"/>
-  <object id="74" name="Battery" x="768" y="640" width="62.4743" height="62.4743"/>
-  <object id="78" name="Battery" x="1024" y="576" width="62.4743" height="62.4743"/>
-  <object id="75" name="Battery" x="1152" y="640" width="63.6932" height="63.6932"/>
+  <object id="41" name="Player0" type="1" x="1152" y="576" width="63.6932" height="63.6932"/>
+  <object id="74" name="Battery" x="768" y="704" width="62.4743" height="62.4743"/>
+  <object id="75" name="Battery" x="1152" y="704" width="63.6932" height="63.6932"/>
  </objectgroup>
 </map>

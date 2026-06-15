@@ -186,7 +186,12 @@ class Game:
         if isinstance(self.current_stage, Level):
             self.ui.level_info()
             if self.current_stage.level_num in self.ui.level_tuto_text:
-                self.ui.level_tuto(self.current_stage.level_num)
+                flashing = any(
+                    p.rect.colliderect(tr)
+                    for p in self.current_stage.player_sprites
+                    for tr in self.current_stage.tutorial_rects
+                )
+                self.ui.level_tuto(self.current_stage.level_num, flashing)
 
         elif isinstance(self.current_stage, Overworld):
             self.ui.map_info()
@@ -443,8 +448,7 @@ class Game:
             keys = pygame.key.get_just_pressed()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    with open(join('data', 'save_file.txt'), 'w') as save_file:
-                         json.dump(self.save.info, save_file)
+                    self.save.save_to_disk()
                     self.running = False
 
             if keys[pygame.K_p] or keys[pygame.K_ESCAPE]:

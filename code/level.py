@@ -126,6 +126,7 @@ class Level:
         for x, y, image in tmx_map.get_layer_by_name('Exit').tiles():
             Sprite((x * TILE_SIZE,y * TILE_SIZE), image, (self.all_sprites, self.collision_sprites, self.exit_sprites, self.game_objects))
 
+        self.tutorial_rects = []
         for obj in tmx_map.get_layer_by_name('Triggers'):
             if obj.name == 'Data':
                 self.extract_info(obj)
@@ -138,6 +139,8 @@ class Level:
                 self.win_rect = pygame.Rect(obj.x, obj.y, obj.width, obj.height)
             if obj.name == 'Unactive':
                 self.unactive_rect = pygame.Rect(obj.x, obj.y, obj.width, obj.height)
+            if obj.name == 'Tutorial':
+                self.tutorial_rects.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
         
         for obj in tmx_map.get_layer_by_name('Entities'):

@@ -2,17 +2,16 @@ from settings import *
 
 import json
 import os
+import platform
 from os.path import join
-# from pathlib import Path
 from datetime import datetime
 
 class Save:
     def __init__(self, level_files):
         self.level_files = level_files
-        # Le fichier de sauvegarde est créé à côté de l'exe
-        self.save_path = join('data', 'save_file.txt')
-        # Créer le dossier data s'il n'existe pas
-        os.makedirs('data', exist_ok=True)
+        save_dir = self._get_save_dir()
+        self.save_path = join(save_dir, 'save_file_nebulon.json')
+        self.backup_path = join(save_dir, 'save_file_backup_nebulon.json')
 
         self._default_info_template = {
             'language': 'fr',
@@ -52,7 +51,7 @@ class Save:
         self.file_info = self.info[cur]
 
     def save_to_disk(self):
-        backup_path = join('data', 'save_file_backup.txt')
+        backup_path = self.backup_path
 
         # Guide to tell how to recover the file
         #header = f'# Largest non-corrupted save file was saved {datetime.now().isoformat(timespec="seconds")}\nTo load that file put the following content inside save_file.txt:\n'
@@ -76,7 +75,20 @@ class Save:
         with open(self.save_path, 'w', encoding='utf-8') as f:
             json.dump(self.info, f, indent=4)
 
-    # ---------- INTERNAL ----------
+    # INTERNAL
+    @staticmethod
+    def _get_save_dir():
+        system = platform.system()
+        if system == 'Windows':
+            base = os.environ.get('APPDATA', os.path.expanduser('~'))
+        elif system == 'Darwin':
+            base = os.path.expanduser('~/Library/Application Support')
+        else:
+            base = os.environ.get('XDG_DATA_HOME', os.path.expanduser('~/.local/share'))
+        path = os.path.join(base, 'Nebulon')
+        os.makedirs(path, exist_ok=True)
+        return path
+
     def _new_slot(self):
         return self._default_info_template.copy()
 

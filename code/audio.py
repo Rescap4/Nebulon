@@ -31,7 +31,6 @@ class AudioManager:
             'sfx': False
         }
 
-
     def play_sfx(self, key, volume=1.0):
         if key not in self.audio_files:
             print(f"[AudioManager] Sound '{key}' not found.")
@@ -50,9 +49,6 @@ class AudioManager:
         # All busy, force playback
         self.sfx_channels[0].play(sound)
         return
-        print('1')
-
-    #def
 
     def play_music(self, key, volume=1.0, loops=-1):
 

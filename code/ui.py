@@ -1,4 +1,5 @@
 from settings import *
+import math
 
 class UI:
     def __init__(self, screen_dimension, menu_input, save, audio, get_stage):
@@ -21,8 +22,9 @@ class UI:
         self.main_menu = 'map menu' # default main menu
         self.home_text = {'fr':'Appuie sur [enter]','eng':'Press [enter]'}
         self.level_tuto_text = {
-            2:  {'fr': '[U] Annuler', 'eng': '[U] Cancel'},
-            3:  {'fr': '[U] Annuler', 'eng': '[U] Cancel'},
+            1:  {'fr': '[U] Annuler', 'eng': '[U] Undo'},
+            2:  {'fr': '[U] Annuler', 'eng': '[U] Undo'},
+            3:  {'fr': '[U] Annuler', 'eng': '[U] Undo'},
             15: {'fr': '[I] Changer', 'eng': '[I] Change'},
             41: {'fr': '[I] Changer', 'eng': '[I] Change'},
         }
@@ -382,7 +384,7 @@ class UI:
 
             self.scrolling_text_y_positions[i] += 100 * dt # initialized in main
 
-    def level_tuto(self, level_num):
+    def level_tuto(self, level_num, flashing=False):
         # bg
         rect = pygame.FRect(0, 0 , 100, 200) # pos, x, y
         rect.center = (self.screen_dimension.width - 120, 160) # pos set to center screen
@@ -390,11 +392,13 @@ class UI:
         # menu
         x = rect.centerx
         y = rect.top + rect.height / (10)
-        color = COLORS['white']
         name = self.level_tuto_text[level_num][self.language]
-        text_surf = self.font.render(name, True, color)
+        text_surf = self.font.render(name, True, COLORS['white'])
         text_rect = text_surf.get_frect(center = (x,y))
         if rect.collidepoint(text_rect.center):
+            if flashing:
+                pulse = (math.sin(pygame.time.get_ticks() / 100) + 1) / 2
+                text_surf.set_alpha(int(105 + 150 * pulse))
             self.display_surface.blit(text_surf, text_rect)
 
     def render_text(self, display):
