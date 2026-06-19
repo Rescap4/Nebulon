@@ -139,12 +139,13 @@ class Game:
             'node_numbers' : import_folder('images', 'numbers'),
             'node_grounds' : import_image('data', 'tilesets', 'grounds_f'),
             'icon' : import_image('images', 'objects', 'icon_a'),
-            'background' : import_image('images', 'backgrounds', 'map_a', alpha = False)
+            'background' : import_image('images', 'backgrounds', 'map_a', alpha = False),
+            'nebulae' : import_image('images', 'backgrounds', 'nebulae_full_b')
         }
 
         self.home_frames = {
             'background' : import_image('images', 'backgrounds', 'map_a', alpha = False),
-            'title' : import_image('images', 'backgrounds', 'title_a')
+            'title' : import_image('images', 'backgrounds', 'title_ai_a')
         }
 
         self.cutscene_frames = {

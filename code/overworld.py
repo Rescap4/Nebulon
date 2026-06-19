@@ -45,6 +45,7 @@ class Overworld:
         self.ground_surf = self.overworld_frames['node_grounds']
         self.icon_sprite = self.overworld_frames['icon']
         self.bg = self.overworld_frames['background']
+        self.nebulae = self.overworld_frames['nebulae']
 
     def setup(self, tmx_map):
         for x, y, image in tmx_map.get_layer_by_name('Decoration').tiles():
@@ -72,6 +73,10 @@ class Overworld:
     def background(self):
         self.bg = pygame.transform.scale(self.bg, FULL_SCREEN_SIZE)
         self.bg_rect = self.bg.get_rect(center=self.display_surface.get_rect().center)
+        nebulae_w = int(self.nebulae.get_width() * 0.6)
+        nebulae_h = int(self.nebulae.get_height() * 0.6)
+        self.nebulae = pygame.transform.scale(self.nebulae, (nebulae_w, nebulae_h))
+        self.nebulae_rect = self.nebulae.get_rect(center=self.display_surface.get_rect().center)
 
     def move_active(self):
         if self.update_flag: # only allow to move when menu closed
@@ -98,6 +103,7 @@ class Overworld:
         self.all_sprites.update(dt)
 
         self.display_surface.blit(self.bg, self.bg_rect)
+        self.display_surface.blit(self.nebulae, self.nebulae_rect)
         self.all_sprites.draw(self.camera.pos)
 
         #debug(f'size is {self.display_surface.get_size()}', 50)
