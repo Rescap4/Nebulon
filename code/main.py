@@ -145,7 +145,8 @@ class Game:
 
         self.home_frames = {
             'background' : import_image('images', 'backgrounds', 'map_a', alpha = False),
-            'title' : import_image('images', 'backgrounds', 'title_ai_a')
+            'title' : import_image('images', 'backgrounds', 'title_a'),
+            'nebulae' : import_image('images', 'backgrounds', 'nebulae_full_b')
         }
 
         self.cutscene_frames = {
@@ -272,7 +273,8 @@ class Game:
                         self.ui.switch_index = 0
                     case 4: # quit game
                         self.ui.open_index = 0
-                        self.running = False
+                        self.switch_level('home', self.screen_dimension)
+                        #self.running = False
 
             elif self.ui.state == 'options' and map_flag:
                 self.option_trigger()

@@ -35,8 +35,8 @@ class Home:
         self.title = self.home_frames['title']
 
     def setup(self, tmx_map):
-        for x, y, image in tmx_map.get_layer_by_name('Decoration').tiles():
-            Sprite((x * TILE_SIZE,y * TILE_SIZE), image, self.all_sprites)
+        #for x, y, image in tmx_map.get_layer_by_name('Decoration').tiles():
+        #    Sprite((x * TILE_SIZE,y * TILE_SIZE), image, self.all_sprites)
         #for x, y, image in tmx_map.get_layer_by_name('Main').tiles():
         #    Sprite((x * TILE_SIZE,y * TILE_SIZE), image, self.all_sprites)
 
