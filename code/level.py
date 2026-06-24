@@ -172,11 +172,11 @@ class Level:
         self.bg = pygame.transform.scale(self.bg, FULL_SCREEN_SIZE)
         self.bg_rect = self.bg.get_rect(center=self.display_surface.get_rect().center)
 
-    def undo(self):
+    def undo(self, force=False):
         """Reverts all sprites to the previous saved state."""
         if self.win_triggered:
             return
-        if self.update_flag and len(self.history.records) > 1:
+        if (force or (self.update_flag and not self.has_movement)) and len(self.history.records) > 1:
             # Remove the latest record
             self.history.records.pop()
             # Load the new last record
@@ -186,6 +186,12 @@ class Level:
                     self.audio.play_sfx('undo_d')
                 for obj, saved_state in zip(self.game_objects, last_record["object"]):
                     obj.update_state(saved_state["position"], saved_state["state"])
+                for obj in self.slide_objects:
+                    obj.direction.x = 0
+                    obj.direction.y = 0
+                    obj.stationnary = True
+                    if hasattr(obj, 'frames_moving'):
+                        obj.frames_moving = 0
         else: #not self.update_flag and len(self.history.records) > 1 and self.update_flag:
             self.audio.play_sfx('error_a')
 
@@ -283,7 +289,7 @@ class Level:
 
 
             if player.state == 'dead' and not self.player_die_timer.active:
-                self.undo()
+                self.undo(force=True)
        
     def collect_battery(self):
         # checks the collected batteries
