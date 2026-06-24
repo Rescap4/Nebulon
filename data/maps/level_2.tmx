@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="83">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="84">
  <tileset firstgid="1" source="../tilesets/tileset_d.tsx"/>
- <objectgroup id="4" name="Triggers">
+ <objectgroup id="4" name="Triggers" visible="0">
   <object id="23" name="Camera1" x="960" y="672">
    <point/>
   </object>
@@ -31,7 +31,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,77,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,77,0,0,0,0,0,77,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -123,8 +123,9 @@
 </data>
  </layer>
  <objectgroup id="2" name="Entities">
-  <object id="41" name="Player0" type="1" x="1152" y="576" width="63.6932" height="63.6932"/>
+  <object id="41" name="Player0" type="1" x="704" y="768" width="63.6932" height="63.6932"/>
   <object id="74" name="Battery" x="768" y="704" width="62.4743" height="62.4743"/>
   <object id="75" name="Battery" x="1152" y="704" width="63.6932" height="63.6932"/>
+  <object id="83" name="Battery" x="960" y="576" width="62.4743" height="62.4743"/>
  </objectgroup>
 </map>

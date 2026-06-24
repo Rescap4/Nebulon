@@ -56,7 +56,6 @@ class Game:
         self.sfx_flag = True
 
         self.fade_oppacity = 0
-        # OLD: self.fade_surf = pygame.Surface(FULL_SCREEN_SIZE)
         self.fade_surf = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.fade_surf.fill((0,0,0))
         self.fade_surf.set_alpha(0)
@@ -145,7 +144,7 @@ class Game:
 
         self.home_frames = {
             'background' : import_image('images', 'backgrounds', 'map_a', alpha = False),
-            'title' : import_image('images', 'backgrounds', 'title_a'),
+            'title' : import_image('images', 'backgrounds', 'title_ai_a'),
             'nebulae' : import_image('images', 'backgrounds', 'nebulae_full_b')
         }
 
@@ -188,18 +187,18 @@ class Game:
         if isinstance(self.current_stage, Level):
             self.ui.level_info()
             if self.current_stage.level_num in self.ui.level_tuto_text:
-                flashing = any(
+                speed_factor = 1 if any(
                     p.rect.colliderect(tr)
                     for p in self.current_stage.player_sprites
                     for tr in self.current_stage.tutorial_rects
-                )
-                self.ui.level_tuto(self.current_stage.level_num, flashing)
+                ) else 0
+                self.ui.level_tuto(self.current_stage.level_num, speed_factor)
 
         elif isinstance(self.current_stage, Overworld):
             self.ui.map_info()
             
         elif isinstance(self.current_stage, Home):
-            self.ui.home_info()
+            self.ui.home_info(speed_factor=0.5)
 
         elif isinstance(self.current_stage, Cutscene):
             ending_num = self.current_stage.ending_num

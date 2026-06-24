@@ -25,12 +25,14 @@ class UI:
             1:  {'fr': '[U] Annuler', 'eng': '[U] Undo'},
             2:  {'fr': '[U] Annuler', 'eng': '[U] Undo'},
             3:  {'fr': '[U] Annuler', 'eng': '[U] Undo'},
+            4:  {'fr': '[U] Annuler', 'eng': '[U] Undo'},
+            6:  {'fr': '[U] Annuler', 'eng': '[U] Undo'},
             15: {'fr': '[I] Changer', 'eng': '[I] Change'},
             41: {'fr': '[I] Changer', 'eng': '[I] Change'},
         }
         self.map_text = [
+            {'fr': '[P] Pause', 'eng': '[P] Pause'},
             {'fr': '[enter] Selectionner', 'eng': '[enter] Select'},
-            {'fr': '[P] Pause',            'eng': '[P] Pause'},
         ]
         self.level_text = '[P] Pause'
         self.ending_text_1 = {'fr':["Les défis ne font que commencer...","","","","","","","","","","", "Merci d'avoir joué!"], 
@@ -311,7 +313,7 @@ class UI:
         if rect.collidepoint(text_rect.center):
             self.display_surface.blit(text_surf, text_rect)
 
-    def home_info(self):
+    def home_info(self, speed_factor=1):
         # bg
         rect = pygame.FRect(0, 0 , 100, 100) # pos, x, y
         rect.center = (self.screen_dimension.width / 2, self.screen_dimension.height - 50) # pos set to center screen
@@ -323,7 +325,9 @@ class UI:
         text_surf = self.font.render(name, True, color)
         text_rect = text_surf.get_frect(center = (x,y))
         if rect.collidepoint(text_rect.center):
+            self.flash_text(text_surf, speed_factor)
             self.display_surface.blit(text_surf, text_rect)
+        
 
     def map_info(self):
             # bg
@@ -384,7 +388,12 @@ class UI:
 
             self.scrolling_text_y_positions[i] += 100 * dt # initialized in main
 
-    def level_tuto(self, level_num, flashing=False):
+    def flash_text(self, text_surf, speed_factor=0):
+        if speed_factor != 0:
+            pulse = (math.sin(pygame.time.get_ticks() * speed_factor / 150) + 1) / 2
+            text_surf.set_alpha(int(145 + 110 * pulse))
+
+    def level_tuto(self, level_num, speed_factor=0):
         # bg
         rect = pygame.FRect(0, 0 , 100, 200) # pos, x, y
         rect.center = (self.screen_dimension.width - 120, 160) # pos set to center screen
@@ -396,10 +405,8 @@ class UI:
         text_surf = self.font.render(name, True, COLORS['white'])
         text_rect = text_surf.get_frect(center = (x,y))
         if rect.collidepoint(text_rect.center):
-            if flashing:
-                pulse = (math.sin(pygame.time.get_ticks() / 100) + 1) / 2
-                text_surf.set_alpha(int(105 + 150 * pulse))
-            self.display_surface.blit(text_surf, text_rect)
+            self.flash_text(text_surf, speed_factor)
+        self.display_surface.blit(text_surf, text_rect)
 
     def render_text(self, display):
         font = pygame.font.Font(TEXT_SETTINGS["font_name"], TEXT_SETTINGS["font_size"])

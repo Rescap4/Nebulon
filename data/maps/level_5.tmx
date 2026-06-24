@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="92">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="95">
  <tileset firstgid="1" source="../tilesets/tileset_d.tsx"/>
- <objectgroup id="4" name="Triggers">
+ <objectgroup id="4" name="Triggers" visible="0">
   <object id="23" name="Camera1" x="960" y="672">
    <point/>
   </object>
@@ -17,6 +17,7 @@
     <property name="level_unlock" value="6, 10, 19"/>
    </properties>
   </object>
+  <object id="94" name="Tutorial" type="1" x="1024" y="448" width="63.6932" height="63.6932"/>
  </objectgroup>
  <layer id="3" name="Decoration" width="30" height="30">
   <data encoding="csv">
@@ -59,9 +60,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,4,6,9,0,4,9,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,4,6,6,6,7,26,8,0,7,27,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,22,26,26,26,44,42,42,0,43,27,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,4,6,9,0,0,0,4,9,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,4,6,6,7,26,8,6,0,6,7,27,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,22,26,26,26,44,42,42,0,43,44,45,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,40,43,26,26,27,0,0,0,40,45,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,22,26,44,45,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,3,0,0,40,2147483685,45,0,0,0,0,21,0,3,0,0,0,0,0,0,0,0,0,0,
@@ -130,5 +131,7 @@
   <object id="86" name="Spike" x="1024" y="768" width="63.5" height="63.5"/>
   <object id="87" name="Spike" x="1024" y="320" width="63.5" height="63.5"/>
   <object id="88" name="Spike" x="768" y="704" width="63.5" height="63.5"/>
+  <object id="92" name="Spike" x="960" y="320" width="63.5" height="63.5"/>
+  <object id="93" name="Spike" x="1088" y="320" width="63.5" height="63.5"/>
  </objectgroup>
 </map>

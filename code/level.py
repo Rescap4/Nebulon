@@ -174,6 +174,8 @@ class Level:
 
     def undo(self):
         """Reverts all sprites to the previous saved state."""
+        if self.win_triggered:
+            return
         if self.update_flag and len(self.history.records) > 1:
             # Remove the latest record
             self.history.records.pop()

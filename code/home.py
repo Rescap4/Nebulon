@@ -51,7 +51,7 @@ class Home:
         self.bg = pygame.transform.scale(self.bg, FULL_SCREEN_SIZE)
         self.bg_rect = self.bg.get_rect(center=self.display_surface.get_rect().center)
         # title
-        self.title = pygame.transform.scale(self.title, (WINDOW_HEIGHT, WINDOW_WIDTH))
+        self.title = pygame.transform.scale(self.title, (WINDOW_WIDTH, WINDOW_HEIGHT))
         self.title_rect = self.title.get_rect(center=self.display_surface.get_rect().center)
         
     def input(self):
