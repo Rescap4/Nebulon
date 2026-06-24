@@ -229,7 +229,7 @@ class Game:
         #self.old_stage = current_stage_name
 
     def open_menu(self):
-        """Draw the menu and prevent movement while open."""
+        #Draw the menu and prevent movement while open
         if self.transition_frames > 0:
             self.transition_frames -= 1
             if self.transition_frames == 0:
@@ -242,7 +242,7 @@ class Game:
             self.current_stage.update_flag = True
 
     def tablet_count(self):
-        #number of collected tablets, curently only checked at start
+        # number of collected tablets, curently only checked at start
         self.tablet_collected =  sum(1 for key, value in self.save.file_info.items() if key.startswith('tablet_') and value)
 
         if self.tablet_collected >= 7 and 'level_0' not in self.save.file_info:

@@ -54,7 +54,7 @@ Licensed under CC BY-SA 3.0 (https://fontstruct.com/fontstructions/show/2330337)
 
 **Musics**
 - Main Theme: "Space" by Alexandr Zhelanov (https://opengameart.org/content/space-1)
-- Pink Area: "At the End of Hope" by Emma_MA (https://opengameart.org/content/at-the-end-of-hope)
+- Pink Area: "Cosmic Creature, Iron Field, Low Breeze Loop" by glitchart (https://opengameart.org/content/cosmic-creature-iron-fields-low-breeze-loop-tsorthan-grove-vitalezzz)
 - Green Area: "Nomogus" by Centurion_of_war (https://opengameart.org/content/nomogus)
 - Orange Area: "Speedier Than Photons" by Joth (https://opengameart.org/content/speedier-than-photons)
 - Blue Area: "Space Sprinkles" by Matthew Pablo (https://opengameart.org/content/space-sprinkles)
