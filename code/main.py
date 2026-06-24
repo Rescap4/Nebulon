@@ -217,7 +217,7 @@ class Game:
 
         elif current_stage_name == 'Level':# and self.old_stage == 'Overworld':
             match self.current_stage.bg_color:
-                case 'pink':   self.audio.play_music('music_pink_b')
+                case 'pink':   self.audio.play_music('music_pink_c')
                 case 'green':  self.audio.play_music('music_green_a')
                 case 'orange': self.audio.play_music('music_orange_a')
                 case 'blue':   self.audio.play_music('music_blue_a')

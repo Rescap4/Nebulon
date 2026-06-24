@@ -20,6 +20,8 @@ class Box(Sprite):
         self.slide_finished = False
         self.old_rect = self.rect.copy()
 
+        self.frames_moving = 0 # used only for player
+
     def state_management(self):
         if self.state == 'outside':
             self.rect.topleft = (DEAD_PLAYER_X, DEAD_PLAYER_Y)

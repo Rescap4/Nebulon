@@ -23,6 +23,7 @@ class Player(AnimatedSprite):
 
         self.hit = None
         self.stationnary = True
+        self.frames_moving = 0
         self.animation = True
         self.slide_finished = False
         self.can_be_shut_off = False
@@ -76,16 +77,20 @@ class Player(AnimatedSprite):
             self.can_move = True
             if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
                 self.direction.x = 1
-                self.stationnary = False  # Disable further direction changes
+                self.stationnary = False
+                self.frames_moving = 0
             elif keys[pygame.K_a] or keys[pygame.K_LEFT]:
                 self.direction.x = -1
                 self.stationnary = False
+                self.frames_moving = 0
             elif keys[pygame.K_w] or keys[pygame.K_UP]:
                 self.direction.y = -1
                 self.stationnary = False
+                self.frames_moving = 0
             elif keys[pygame.K_s] or keys[pygame.K_DOWN]:
                 self.direction.y = 1
                 self.stationnary = False
+                self.frames_moving = 0
         else:
             self.can_move = False
 
@@ -234,16 +239,18 @@ class Player(AnimatedSprite):
                         self.push_delay.activate() # using the form of the previous collision checks makes it messier 
                         # timer
                         if direction == 'horizontal':
-                            if self.direction.x > 0:                               
+                            if self.direction.x > 0:
                                 sprite.direction.x = 1
                                 self.rect.right = sprite.rect.left
                                 self.direction.x = 0
+                                self.frames_moving = 0
                                 sprite.stationnary = False
 
-                            elif self.direction.x < 0:                                
+                            elif self.direction.x < 0:
                                 sprite.direction.x = -1
                                 self.rect.left = sprite.rect.right
                                 self.direction.x = 0
+                                self.frames_moving = 0
                                 sprite.stationnary = False
 
                         if direction == 'vertical':
@@ -252,12 +259,14 @@ class Player(AnimatedSprite):
                                 sprite.direction.y = 1
                                 self.rect.bottom = sprite.rect.top
                                 self.direction.y = 0
+                                self.frames_moving = 0
 
                             elif self.direction.y < 0:
                                 sprite.stationnary = False
                                 sprite.direction.y = -1
                                 self.rect.top = sprite.rect.bottom
                                 self.direction.y = 0
+                                self.frames_moving = 0
 
     def move(self, dt):        
         # Move horizontally and check for wall collision first
@@ -269,8 +278,10 @@ class Player(AnimatedSprite):
         self.object_collision('vertical')
 
     def update(self, dt):
-        
+
         self.old_rect = self.rect.copy()
+        if not self.stationnary and (self.direction.x != 0 or self.direction.y != 0):
+            self.frames_moving += 1
         self.move_delay.update()
         self.push_delay.update()
         self.flash_delay.update()

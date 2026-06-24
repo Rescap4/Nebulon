@@ -191,7 +191,9 @@ class Level:
 
     def impact_trigger(self):
         for obj in self.slide_objects:
-            if obj.old_rect.topleft != obj.rect.topleft and obj.stationnary and (obj.state == 'active' or obj.state == 'awakened'): # obj stop place
+            if (obj.old_rect.topleft != obj.rect.topleft or getattr(obj, 'frames_moving', 0) > 1) and obj.stationnary and (obj.state == 'active' or obj.state == 'awakened'): # obj stop place
+                if hasattr(obj, 'frames_moving'):
+                    obj.frames_moving = 0
                 self.audio.play_sfx('impact_a')
                 self.history.save_state(self.game_objects.sprites())   
                 self.screen_shake()
