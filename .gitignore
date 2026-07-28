@@ -10,6 +10,7 @@ __pycache__/
 
 # Editor settings
 .vscode/
+tempCodeRunnerFile.py
 
 # Old source copy
 Nebulon-main/

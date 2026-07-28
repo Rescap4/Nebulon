@@ -71,12 +71,13 @@ class Overworld:
         self.icon = Icon(literal_eval(self.save.file_info['icon_pos']), self.icon_sprite, self.all_sprites, self.collision_sprites, self.node_sprites, self.audio)
         
     def background(self):
-        self.bg = pygame.transform.scale(self.bg, FULL_SCREEN_SIZE)
+        self.bg = pygame.transform.scale(self.overworld_frames['background'], FULL_SCREEN_SIZE)
         self.bg_rect = self.bg.get_rect(center=self.display_surface.get_rect().center)
-        
-        nebulae_w = int(self.nebulae.get_width() * 0.6) # le redimentionnement fait que spam f diminue la grandeur 
-        nebulae_h = int(self.nebulae.get_height() * 0.6)
-        self.nebulae = pygame.transform.scale(self.nebulae, (nebulae_w, nebulae_h))
+
+        original_nebulae = self.overworld_frames['nebulae']
+        nebulae_w = int(original_nebulae.get_width() * 0.6)
+        nebulae_h = int(original_nebulae.get_height() * 0.6)
+        self.nebulae = pygame.transform.scale(original_nebulae, (nebulae_w, nebulae_h))
         self.nebulae_rect = self.nebulae.get_rect(center=self.display_surface.get_rect().center)
 
     def move_active(self):
