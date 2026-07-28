@@ -93,6 +93,24 @@ class AudioManager:
         for channel in self.channels.values():
             channel.stop()
 
+    # ---------- VOLUME LEVEL FUNCTIONS (0-5) ----------
+
+    def set_music_volume(self, level):
+        volume = level / 5
+        self.default_volumes['music'] = volume
+        self.muted['music'] = level == 0
+        pygame.mixer.music.set_volume(volume)
+
+    def set_sound_volume(self, level):
+        volume = level / 5
+        self.default_volumes['looped'] = volume
+        self.default_volumes['sfx'] = volume
+        self.muted['looped'] = level == 0
+        self.muted['sfx'] = level == 0
+        self.channels['looped'].set_volume(volume)
+        for channel in self.sfx_channels:
+            channel.set_volume(volume)
+
     # ---------- MUTE/UNMUTE FUNCTIONS ----------
 
     def mute_music(self):

@@ -43,8 +43,8 @@ class UI:
                               'eng':['Continue', 'Restart', 'Hint', 'Options', 'Quit Level']}
         self.map_options = {'fr':['Continuer', 'Tablettes', 'Options', 'Charger Partie', 'Quitter Jeu'],
                             'eng':['Continue', 'Tablets', 'Options', 'Load File', 'Quit Game']}
-        self.setting_options = {'fr':['Plein Ecran [F]', 'Grille [G]', 'Tremblement [T]', 'Musique', 'Langue'],
-                                'eng':['Full Screen [F]', 'Grid [G]', 'Shake [T]', 'Music', 'Language']}
+        self.setting_options = {'fr':['Grille [G]', 'Tremblement [T]', 'Musique', 'Sons', 'Langue'],
+                                'eng':['Grid [G]', 'Shake [T]', 'Music', 'Sound', 'Language']}
         self.action_options = {'fr':['Haut [W]', 'Bas [S]', 'Gauche [A]', 'Droite [D]', 'Annuler : [U]', 'Changer : [I]'], # unused
                                'eng':['Up [W]', 'Down [S]', 'Left [A]', 'Right [D]', 'Undo : [U]', 'Change : [I]']}
         self.tablet_options = ['01', '02', '03', '04', '05', '06', '07', '08']
@@ -97,6 +97,13 @@ class UI:
                 self.state = 'level'
                 self.switch_index = 0
                 back_flag = False
+
+            if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
+                self.menu_input(('adjust', 1))
+                self.audio.play_sfx('click_a')
+            elif keys[pygame.K_a] or keys[pygame.K_LEFT]:
+                self.menu_input(('adjust', -1))
+                self.audio.play_sfx('click_a')
 
         elif self.state == 'map':
             self.main_menu = 'map menu'
@@ -268,19 +275,33 @@ class UI:
         pygame.draw.rect(self.display_surface, COLORS['black'], rect, 0)
         pygame.draw.rect(self.display_surface, COLORS['gray'], rect, 5)
 
+        # value shown to the right of each row: 0/1 for on-off toggles, 0-5 for volume levels
+        values = [
+            int(self.save.file_info['grid']),
+            int(self.save.file_info['shake']),
+            self.save.file_info['music_volume'],
+            self.save.file_info['sound_volume'],
+            'Fr' if self.language == 'fr' else 'Eng',
+        ]
+
         # menu
-        v_offset = 0 if self.switch_index < 5 else -(self.switch_index - 3) * rect.height / 5 
+        v_offset = 0 if self.switch_index < 5 else -(self.switch_index - 3) * rect.height / 5
         for i in range(len(self.setting_options[self.language])):
-            x = rect.centerx
             y = rect.top + rect.height / (10) + rect.height / 5 * i + v_offset
             color = COLORS['white'] if i == self.switch_index else COLORS['gray']
             name = self.setting_options[self.language][i]
 
 
             text_surf = self.font.render(name, True, color)
-            text_rect = text_surf.get_frect(center = (x,y))
+            text_rect = text_surf.get_frect(midleft = (rect.left + 80, y)) ###
             if rect.collidepoint(text_rect.center):
                 self.display_surface.blit(text_surf, text_rect)
+
+            if values[i] is not None:
+                value_surf = self.font.render(str(values[i]), True, color)
+                value_rect = value_surf.get_frect(midright = (rect.right - 80, y)) ###
+                if rect.collidepoint(value_rect.center):
+                    self.display_surface.blit(value_surf, value_rect)
 
     def pause_info(self):
         #currentrly always called

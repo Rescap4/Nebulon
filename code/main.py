@@ -45,15 +45,14 @@ class Game:
         self.save = Save(self.level_files)
         self.audio = AudioManager()
         self.data = Data()
-        
+
+        self.audio.set_music_volume(self.save.file_info['music_volume'])
+        self.audio.set_sound_volume(self.save.file_info['sound_volume'])
+
         self.current_stage = Home(self.tmx_home, self.save, self.data, self.home_frames, self.audio, self.switch_level, self.screen_dimension)
         self.ui = UI(self.screen_dimension, self.menu_input, self.save, self.audio, get_stage=lambda: self.current_stage.level_num)
 
         #self.current_stage = Level(load_pygame(join('data', 'maps', 'lvl_26_2.tmx')), self.save, self.data, self.home_frames, self.audio, self.switch_level, self.screen_dimension)
-
-        
-        self.music_flag = True
-        self.sfx_flag = True
 
         self.fade_oppacity = 0
         self.fade_surf = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -61,6 +60,7 @@ class Game:
         self.fade_surf.set_alpha(0)
 
         self.general_music()
+        self.full_screen()
 
     def fade_out(self):
         level = isinstance(self.current_stage, Level) and self.current_stage.level_num in [0, 70]
@@ -144,7 +144,7 @@ class Game:
 
         self.home_frames = {
             'background' : import_image('images', 'backgrounds', 'map_a', alpha = False),
-            'title' : import_image('images', 'backgrounds', 'title_ai_a'),
+            'title' : import_image('images', 'backgrounds', 'title_a'),
             'nebulae' : import_image('images', 'backgrounds', 'nebulae_full_b')
         }
 
@@ -209,7 +209,7 @@ class Game:
         
     def general_music(self):
         current_stage_name = self.current_stage.__class__.__name__
-        if not self.music_flag:
+        if self.save.file_info['music_volume'] == 0:
             return
         elif current_stage_name in ['Home', 'Overworld']:
             self.audio.play_music('music_theme_b')
@@ -249,6 +249,10 @@ class Game:
             self.save.file_info[f'level_0'] = False
              
     def menu_input(self, state):
+        if isinstance(state, tuple) and state[0] == 'adjust':
+            self.adjust_option(state[1])
+            return
+
         # map options
         map_flag = True
         level_flag = True
@@ -272,8 +276,8 @@ class Game:
                         self.ui.switch_index = 0
                     case 4: # quit game
                         self.ui.open_index = 0
-                        self.switch_level('home', self.screen_dimension)
-                        #self.running = False
+                        self.save.save_to_disk()
+                        self.running = False
 
             elif self.ui.state == 'options' and map_flag:
                 self.option_trigger()
@@ -317,16 +321,14 @@ class Game:
     def option_trigger(self):
         # include a sound to show that it worked
         match self.ui.switch_index:
-            case 0: # full screen
-                self.full_screen()
-            case 1: # gid
+            case 0: # grid
                 self.save.file_info['grid'] = not self.save.file_info['grid']
-            case 2: # shake
+            case 1: # shake
                 self.save.file_info['shake'] = not self.save.file_info['shake']
-            case 3: # music
-                self.toggle_music()
-            #case 4: # sound effect # replaced with language
-            #    self.toggle_sound()
+            case 2: # music
+                self.cycle_music_volume()
+            case 3: # sound
+                self.cycle_sound_volume()
             case 4: # language
                 self.change_language()
 
@@ -367,7 +369,7 @@ class Game:
         self.is_full_screen = not self.is_full_screen
     
         if self.is_full_screen:
-            # Detect the monitor's native resolution.
+            # detect the monitor's native resolution.
             desktop_sizes = getattr(pygame.display, "get_desktop_sizes", None)
             if callable(desktop_sizes):
                 monitor_w, monitor_h = desktop_sizes()[0]
@@ -375,11 +377,6 @@ class Game:
                 info = pygame.display.Info()
                 monitor_w, monitor_h = info.current_w, info.current_h
 
-            # Compute a logical size that exactly matches the monitor's aspect ratio
-            # so pygame.SCALED fills the screen with zero black bars.
-            # We keep whichever game dimension is the bottleneck and expand the other:
-            # - monitor wider than game  → expand logical width,  keep height
-            # - monitor taller than game → expand logical height, keep width
             if monitor_w / monitor_h > WINDOW_WIDTH / WINDOW_HEIGHT:
                 fs_w = round(WINDOW_HEIGHT * monitor_w / monitor_h)
                 fs_h = WINDOW_HEIGHT
@@ -395,35 +392,44 @@ class Game:
                 pygame.FULLSCREEN | pygame.SCALED
             )
         else:
-            # Retour fenêtré avec SCALED
             self.screen_dimension = pygame.display.set_mode(
                 (WINDOW_WIDTH, WINDOW_HEIGHT),
                 pygame.SCALED
             )
     
-        self.audio.play_sfx('select_a')
+        #self.audio.play_sfx('select_a')
         self.current_stage.background()
         w, h = self.screen_dimension.get_size()
         self.fade_surf = pygame.Surface((w, h))
         self.fade_surf.fill((0, 0, 0))
         self.fade_surf.set_alpha(self.fade_oppacity)
 
-    def toggle_music(self):
-        self.music_flag = not self.music_flag
-        if self.music_flag:
-            self.general_music()
-        else: 
+    def cycle_music_volume(self, direction=1):
+        self.save.file_info['music_volume'] = (self.save.file_info['music_volume'] + direction) % 6
+        level = self.save.file_info['music_volume']
+        self.audio.set_music_volume(level)
+        if level == 0:
             self.audio.stop_music()
             self.audio.current_music_key = None
+        else:
+            self.general_music()
 
-    def toggle_sound(self):
-        self.sfx_flag = not self.sfx_flag
-        if self.sfx_flag:
-            self.audio.unmute_looped()
-            self.audio.unmute_sfx()
-        else: 
-            self.audio.mute_looped()
-            self.audio.mute_sfx()
+    def cycle_sound_volume(self, direction=1):
+        self.save.file_info['sound_volume'] = (self.save.file_info['sound_volume'] + direction) % 6
+        self.audio.set_sound_volume(self.save.file_info['sound_volume'])
+
+    def adjust_option(self, direction):
+        match self.ui.switch_index:
+            case 0: # grid
+                self.save.file_info['grid'] = not self.save.file_info['grid']
+            case 1: # shake
+                self.save.file_info['shake'] = not self.save.file_info['shake']
+            case 2: # music
+                self.cycle_music_volume(direction)
+            case 3: # sound
+                self.cycle_sound_volume(direction)
+            case 4: # language
+                self.change_language()
 
     def change_language(self):
         if self.ui.language == 'fr':
@@ -458,9 +464,9 @@ class Game:
             if keys[pygame.K_f]:
                 self.full_screen()
             #if keys[pygame.K_m]:
-            #    self.toggle_music()
+            #    self.cycle_music_volume()
             #if keys[pygame.K_n]:
-            #    self.toggle_sound()
+            #    self.cycle_sound_volume()
             #if keys[pygame.K_l]:
             #    self.change_language()
 

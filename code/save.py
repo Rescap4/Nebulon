@@ -17,6 +17,8 @@ class Save:
             'language': 'fr',
             'grid': True,
             'shake': True,
+            'music_volume': 5,
+            'sound_volume': 5,
             'icon_pos': '[576, 704]',
             'level_1': False
         }

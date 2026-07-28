@@ -40,6 +40,8 @@ pip install pytmx
 
 ## Credits ##
 
+All third-party assets are free to use, even commercially. Most are licensed under CC-BY (https://creativecommons.org/licenses/by/4.0/)
+
 **Tileset:** "block_tileset" by Matt-Owen  
 (https://mowen88.itch.io/cyber-punk-scifi-pixel-art)
 
