@@ -519,12 +519,12 @@ class Level:
             self.switch_active_player()  
         if keys[pygame.K_u]:
             self.undo()
-        if keys[pygame.K_g]:
-            self.activate_grid()
-        if keys[pygame.K_t]:
-            self.activate_shake()
-        if keys[pygame.K_m]: #temporary
-            self.history.save_state(self.game_objects.sprites())
+        #if keys[pygame.K_g]:
+        #    self.activate_grid()
+        #if keys[pygame.K_t]:
+        #    self.activate_shake()
+        #if keys[pygame.K_m]: #temporary
+        #    self.history.save_state(self.game_objects.sprites())
             
     def run(self, dt):
         self.input()

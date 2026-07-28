@@ -96,7 +96,7 @@ class Overworld:
                         self.save.file_info['icon_pos'] = str(self.icon.pos)
                         self.switch_level('level', self.screen_dimension, 0)
 
-                    if keys[pygame.K_g] or keys[pygame.K_t] or keys[pygame.K_u] or keys[pygame.K_i]:
+                    if keys[pygame.K_u] or keys[pygame.K_i]:
                         self.audio.play_sfx('error_a')
 
     def run(self, dt):
