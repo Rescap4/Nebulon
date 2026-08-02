@@ -14,7 +14,7 @@ class Save:
         self.backup_path = join(save_dir, 'save_file_backup_nebulon.json')
 
         self._default_info_template = {
-            'language': 'fr',
+            'language': 'eng',
             'grid': True,
             'shake': True,
             'music_volume': 5,
