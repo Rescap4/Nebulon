@@ -74,11 +74,13 @@ class Overworld:
         self.bg = pygame.transform.scale(self.overworld_frames['background'], FULL_SCREEN_SIZE)
         self.bg_rect = self.bg.get_rect(center=self.display_surface.get_rect().center)
 
+        factor = 1.08
         original_nebulae = self.overworld_frames['nebulae']
-        nebulae_w = int(original_nebulae.get_width() * 0.6)
-        nebulae_h = int(original_nebulae.get_height() * 0.6)
-        self.nebulae = pygame.transform.scale(original_nebulae, (nebulae_w, nebulae_h))
+        full_w, full_h = self.overworld_frames['nebulae_full'].get_size()
+        target_size = (int(full_w * factor), int(full_h * factor))
+        self.nebulae = pygame.transform.scale(original_nebulae, target_size)
         self.nebulae_rect = self.nebulae.get_rect(center=self.display_surface.get_rect().center)
+        #self.nebulae_rect.x += 16
 
     def move_active(self):
         if self.update_flag: # only allow to move when menu closed
@@ -91,7 +93,7 @@ class Overworld:
             for node in self.node_sprites:
                 if node.rect.colliderect(self.icon): 
                     self.data.current_level = int(node.level_num)
-                    if (keys[pygame.K_RETURN] or keys[pygame.K_SPACE]) and self.data.current_level in self.data.levels_imported:
+                    if (keys[pygame.K_RETURN] or keys[pygame.K_KP_ENTER] or keys[pygame.K_SPACE]) and self.data.current_level in self.data.levels_imported:
                         self.audio.play_sfx('enter_b')
                         self.save.file_info['icon_pos'] = str(self.icon.pos)
                         self.switch_level('level', self.screen_dimension, 0)

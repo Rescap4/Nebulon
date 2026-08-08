@@ -139,13 +139,15 @@ class Game:
             'node_grounds' : import_image('data', 'tilesets', 'grounds_f'),
             'icon' : import_image('images', 'objects', 'icon_a'),
             'background' : import_image('images', 'backgrounds', 'map_a', alpha = False),
-            'nebulae' : import_image('images', 'backgrounds', 'nebulae_full_b')
+            'nebulae' : import_image('images', 'backgrounds', 'nebulae_a'),
+            'nebulae_full' : import_image('images', 'backgrounds', 'nebulae_full_b')
         }
 
         self.home_frames = {
             'background' : import_image('images', 'backgrounds', 'map_a', alpha = False),
-            'title' : import_image('images', 'backgrounds', 'title_a'),
-            'nebulae' : import_image('images', 'backgrounds', 'nebulae_full_b')
+            'title' : import_image('images', 'backgrounds', 'title_b'),
+            'nebulae' : import_image('images', 'backgrounds', 'nebulae_a'),
+            'nebulae_full' : import_image('images', 'backgrounds', 'nebulae_full_b')
         }
 
         self.cutscene_frames = {
@@ -281,9 +283,6 @@ class Game:
 
             elif self.ui.state == 'options' and map_flag:
                 self.option_trigger()
-                self.ui.state = 'map'
-                self.ui.open_index = 0
-                self.ui.switch_index = 0
 
             elif self.ui.state == 'file'and map_flag:
                 self.ui.open_index = 0
@@ -314,9 +313,6 @@ class Game:
 
             elif self.ui.state == 'options' and level_flag:
                     self.option_trigger()
-                    self.ui.state = 'level'
-                    self.ui.open_index = 0
-                    self.ui.switch_index = 0
 
     def option_trigger(self):
         # include a sound to show that it worked

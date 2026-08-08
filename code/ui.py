@@ -43,8 +43,8 @@ class UI:
                               'eng':['Continue', 'Restart', 'Hint', 'Options', 'Quit Level']}
         self.map_options = {'fr':['Continuer', 'Tablettes', 'Options', 'Charger Partie', 'Quitter Jeu'],
                             'eng':['Continue', 'Tablets', 'Options', 'Load File', 'Quit Game']}
-        self.setting_options = {'fr':['Grille', 'Tremblement', 'Musique', 'Sons', 'Langue'],
-                                'eng':['Grid', 'Shake', 'Music', 'Sound', 'Language']}
+        self.setting_options = {'fr':['Grille', 'Tremblement', 'Musique', 'Effets sonores', 'Langue'],
+                                'eng':['Grid', 'Shake', 'Music', 'Sound effects', 'Language']}
         self.action_options = {'fr':['Haut [W]', 'Bas [S]', 'Gauche [A]', 'Droite [D]', 'Annuler : [U]', 'Changer : [I]'], # unused
                                'eng':['Up [W]', 'Down [S]', 'Left [A]', 'Right [D]', 'Undo : [U]', 'Change : [I]']}
         self.tablet_options = ['01', '02', '03', '04', '05', '06', '07', '08']
@@ -57,7 +57,7 @@ class UI:
         if self.state == 'file':
             self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(SAVE_FILE_NAMES[self.language])
 
-            if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
+            if keys[pygame.K_RETURN] or keys[pygame.K_KP_ENTER] or keys[pygame.K_SPACE]:
                 self.menu_input(self.state) 
                 self.save.info['current_file'] = (SAVE_FILES[self.switch_index])
                 
@@ -68,7 +68,7 @@ class UI:
 
         elif self.state == 'tablet':
             self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(TEXT_TABLETS[self.language])
-            if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
+            if keys[pygame.K_RETURN] or keys[pygame.K_KP_ENTER] or keys[pygame.K_SPACE]:
                 self.state = 'map'
                 self.open_index = 0
             elif keys[pygame.K_BACKSPACE]:
@@ -77,7 +77,7 @@ class UI:
                 back_flag = False
 
         elif self.state == 'indice':
-            if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
+            if keys[pygame.K_RETURN] or keys[pygame.K_KP_ENTER] or keys[pygame.K_SPACE]:
                 self.open_index = 0
                 self.state = 'level'
             elif keys[pygame.K_BACKSPACE]:
@@ -87,7 +87,7 @@ class UI:
 
         elif self.state == 'options':
             self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(self.setting_options[self.language])
-            if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
+            if keys[pygame.K_RETURN] or keys[pygame.K_KP_ENTER] or keys[pygame.K_SPACE]:
                 self.menu_input(self.state)
             elif keys[pygame.K_BACKSPACE] and self.main_menu == 'map menu':
                 self.state = 'map'
@@ -108,7 +108,7 @@ class UI:
         elif self.state == 'map':
             self.main_menu = 'map menu'
             self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(self.map_options[self.language])
-            if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
+            if keys[pygame.K_RETURN] or keys[pygame.K_KP_ENTER] or keys[pygame.K_SPACE]:
                 self.menu_input(self.state)
             if keys[pygame.K_BACKSPACE] and back_flag:
                 self.open_index = 0
@@ -116,14 +116,17 @@ class UI:
         elif self.state == 'level':
             self.main_menu = 'level menu'
             self.switch_index = (self.switch_index + int(keys[pygame.K_s]) + int(keys[pygame.K_DOWN]) - int (keys[pygame.K_w]) - int(keys[pygame.K_UP])) % len(self.level_options[self.language])
-            if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
+            if keys[pygame.K_RETURN] or keys[pygame.K_KP_ENTER] or keys[pygame.K_SPACE]:
                 self.menu_input(self.state)
             elif keys[pygame.K_BACKSPACE] and back_flag:
                 self.open_index = 0
 
         # sound
-        if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
-            self.audio.play_sfx('select_a')
+        if keys[pygame.K_RETURN] or keys[pygame.K_KP_ENTER] or keys[pygame.K_SPACE]:
+            if self.state == 'options':
+                self.audio.play_sfx('click_a')
+            else:
+                self.audio.play_sfx('select_a')
         if self.switch_index != previous_index:
             self.audio.play_sfx('click_a')
         if keys[pygame.K_BACKSPACE]:

@@ -33,6 +33,7 @@ class Home:
     def load_assets(self):
         self.bg = self.home_frames['background']
         self.title = self.home_frames['title']
+        self.nebulae = self.home_frames['nebulae']
 
     def setup(self, tmx_map):
         #for x, y, image in tmx_map.get_layer_by_name('Decoration').tiles():
@@ -50,13 +51,20 @@ class Home:
         # bg
         self.bg = pygame.transform.scale(self.bg, FULL_SCREEN_SIZE)
         self.bg_rect = self.bg.get_rect(center=self.display_surface.get_rect().center)
+        # nebulae
+        factor = 1.08
+        original_nebulae = self.nebulae
+        full_w, full_h = self.home_frames['nebulae_full'].get_size()
+        target_size = (int(full_w * factor), int(full_h * factor))
+        self.nebulae = pygame.transform.scale(original_nebulae, target_size)
+        self.nebulae_rect = self.nebulae.get_rect(center=self.display_surface.get_rect().center)
         # title
         self.title = pygame.transform.scale(self.title, (WINDOW_WIDTH, WINDOW_HEIGHT))
         self.title_rect = self.title.get_rect(center=self.display_surface.get_rect().center)
         
     def input(self):
         keys = pygame.key.get_just_pressed()
-        if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
+        if keys[pygame.K_RETURN] or keys[pygame.K_KP_ENTER] or keys[pygame.K_SPACE]:
             self.switch_level('map', 0)
             if self.switch_level('map', 0): # ensure the sound effect only plays when switch level succeds
                 self.audio.play_sfx('enter_b')
@@ -68,5 +76,6 @@ class Home:
         self.all_sprites.update(dt)
 
         self.display_surface.blit(self.bg, self.bg_rect)
+        self.display_surface.blit(self.nebulae, self.nebulae_rect)
         self.display_surface.blit(self.title, self.title_rect)
         self.all_sprites.draw(self.camera.pos)
