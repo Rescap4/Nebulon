@@ -73,8 +73,7 @@ class Game:
 
             if cutscene:
                 if self.current_stage.cutscene_timer.elapsed_time <= 17000:
-                    self.fade_oppacity = max(self.fade_oppacity - 2, 0)  # Fade-out after 8000ms
-
+                    self.fade_oppacity = max(self.fade_oppacit - 2, 0)  # Fade-out after 8000ms
                 else:
                     self.fade_oppacity = min(self.fade_oppacity + 2, 255)  # Continue fading in until fully visible
 
@@ -139,15 +138,14 @@ class Game:
             'node_grounds' : import_image('data', 'tilesets', 'grounds_f'),
             'icon' : import_image('images', 'objects', 'icon_a'),
             'background' : import_image('images', 'backgrounds', 'map_a', alpha = False),
-            'nebulae' : import_image('images', 'backgrounds', 'nebulae_a'),
-            'nebulae_full' : import_image('images', 'backgrounds', 'nebulae_full_b')
+            'nebulae' : import_image('images', 'backgrounds', 'nebulae_c'),
+            'nebulae_full' : import_image('images', 'backgrounds', 'nebulae_full_d')
         }
 
         self.home_frames = {
             'background' : import_image('images', 'backgrounds', 'map_a', alpha = False),
             'title' : import_image('images', 'backgrounds', 'title_b'),
-            'nebulae' : import_image('images', 'backgrounds', 'nebulae_a'),
-            'nebulae_full' : import_image('images', 'backgrounds', 'nebulae_full_b')
+            'nebulae' : import_image('images', 'backgrounds', 'nebulae_home_a')
         }
 
         self.cutscene_frames = {

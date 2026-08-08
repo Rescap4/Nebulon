@@ -43,8 +43,8 @@ class UI:
                               'eng':['Continue', 'Restart', 'Hint', 'Options', 'Quit Level']}
         self.map_options = {'fr':['Continuer', 'Tablettes', 'Options', 'Charger Partie', 'Quitter Jeu'],
                             'eng':['Continue', 'Tablets', 'Options', 'Load File', 'Quit Game']}
-        self.setting_options = {'fr':['Grille', 'Tremblement', 'Musique', 'Effets sonores', 'Langue'],
-                                'eng':['Grid', 'Shake', 'Music', 'Sound effects', 'Language']}
+        self.setting_options = {'fr':['Grille', 'Tremblement', 'Musique', 'Effets Sonores', 'Langue'],
+                                'eng':['Grid', 'Shake', 'Music', 'Sound Effects', 'Language']}
         self.action_options = {'fr':['Haut [W]', 'Bas [S]', 'Gauche [A]', 'Droite [D]', 'Annuler : [U]', 'Changer : [I]'], # unused
                                'eng':['Up [W]', 'Down [S]', 'Left [A]', 'Right [D]', 'Undo : [U]', 'Change : [I]']}
         self.tablet_options = ['01', '02', '03', '04', '05', '06', '07', '08']

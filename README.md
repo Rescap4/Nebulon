@@ -42,10 +42,13 @@ pip install pytmx
 
 All third-party assets are free to use, even commercially. Most are licensed under CC-BY (https://creativecommons.org/licenses/by/4.0/)
 
-**Tileset:** "block_tileset" by Matt-Owen  
+**Tileset** "block_tileset" by Matt-Owen  
 (https://mowen88.itch.io/cyber-punk-scifi-pixel-art)
 
-**Backgrounds:** "PixelSpace" background generator by Deep-Fold  
+**Nebulae** House of Baloons by Kokino1250
+(https://)
+
+**Backgrounds** "PixelSpace" background generator by Deep-Fold  
 (https://deep-fold.itch.io/space-background-generator)
 
 **Font:** "VHS Gothic" by Spottie Leonard, based on *"CHARGEN '92"* by ParadigmTheGreat  

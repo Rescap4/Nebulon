@@ -52,12 +52,20 @@ class Home:
         self.bg = pygame.transform.scale(self.bg, FULL_SCREEN_SIZE)
         self.bg_rect = self.bg.get_rect(center=self.display_surface.get_rect().center)
         # nebulae
-        factor = 1.08
+        size_factor = 1.98
         original_nebulae = self.nebulae
-        full_w, full_h = self.home_frames['nebulae_full'].get_size()
-        target_size = (int(full_w * factor), int(full_h * factor))
+        full_w, full_h = self.home_frames['nebulae'].get_size()
+        target_size = (int(full_w * size_factor), int(full_h * size_factor))
         self.nebulae = pygame.transform.scale(original_nebulae, target_size)
         self.nebulae_rect = self.nebulae.get_rect(center=self.display_surface.get_rect().center)
+        self.nebulae_rect.y -= 90
+        self.nebulae_rect.x -= 2
+        self.nebulae_rect.y -= 2
+        # dark overlay
+        self.overlay = pygame.Surface(self.display_surface.get_size())
+        self.overlay.fill(COLORS['black'])
+        self.overlay.set_alpha(188) #128
+        self.overlay_rect = self.overlay.get_rect(topleft=(0, 0))
         # title
         self.title = pygame.transform.scale(self.title, (WINDOW_WIDTH, WINDOW_HEIGHT))
         self.title_rect = self.title.get_rect(center=self.display_surface.get_rect().center)
@@ -77,5 +85,6 @@ class Home:
 
         self.display_surface.blit(self.bg, self.bg_rect)
         self.display_surface.blit(self.nebulae, self.nebulae_rect)
+        self.display_surface.blit(self.overlay, self.overlay_rect)
         self.display_surface.blit(self.title, self.title_rect)
         self.all_sprites.draw(self.camera.pos)

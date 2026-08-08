@@ -37,19 +37,20 @@ class Overworld:
         self.is_full_screen = False
         self.camera = self.camera1
 
-        
-
-
     def load_assets(self):
         self.node_numbers = self.overworld_frames['node_numbers']
         self.ground_surf = self.overworld_frames['node_grounds']
         self.icon_sprite = self.overworld_frames['icon']
         self.bg = self.overworld_frames['background']
-        self.nebulae = self.overworld_frames['nebulae']
+        if 'level_33' in self.save.file_info:
+            self.nebulae = self.overworld_frames['nebulae_full']
+        else:
+            self.nebulae = self.overworld_frames['nebulae']
 
     def setup(self, tmx_map):
         for x, y, image in tmx_map.get_layer_by_name('Decoration').tiles():
-            Sprite((x * TILE_SIZE,y * TILE_SIZE), image, self.all_sprites)
+            decoration_image = image.copy()
+            Sprite((x * TILE_SIZE,y * TILE_SIZE), decoration_image, self.all_sprites)
 
         # extra levels when show when level 33 is unlocked
         if 'level_33' in self.save.file_info:
@@ -74,13 +75,15 @@ class Overworld:
         self.bg = pygame.transform.scale(self.overworld_frames['background'], FULL_SCREEN_SIZE)
         self.bg_rect = self.bg.get_rect(center=self.display_surface.get_rect().center)
 
-        factor = 1.08
-        original_nebulae = self.overworld_frames['nebulae']
+        size_factor = 1.98
+        original_nebulae = self.nebulae
         full_w, full_h = self.overworld_frames['nebulae_full'].get_size()
-        target_size = (int(full_w * factor), int(full_h * factor))
+        target_size = (int(full_w * size_factor), int(full_h * size_factor))
         self.nebulae = pygame.transform.scale(original_nebulae, target_size)
         self.nebulae_rect = self.nebulae.get_rect(center=self.display_surface.get_rect().center)
-        #self.nebulae_rect.x += 16
+        self.nebulae_rect.y -= 90
+        self.nebulae_rect.x -= 2
+        self.nebulae_rect.y -= 2
 
     def move_active(self):
         if self.update_flag: # only allow to move when menu closed
