@@ -45,8 +45,8 @@ All third-party assets are free to use, even commercially. Most are licensed und
 **Tileset** "block_tileset" by Matt-Owen  
 (https://mowen88.itch.io/cyber-punk-scifi-pixel-art)
 
-**Nebulae** House of Baloons by Kokino1250
-(https://)
+**Nebulae** "Black Hole Nebulae" by Kokino1250
+(https://__)
 
 **Backgrounds** "PixelSpace" background generator by Deep-Fold  
 (https://deep-fold.itch.io/space-background-generator)
