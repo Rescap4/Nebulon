@@ -325,8 +325,8 @@ class UI:
         name = str(stage)
         #"current_file": "0"
         #f'level_{int(obj.properties['level'])}' in self.save.file_info:
-        if stage == '': #will display the name of the safe file?
-            pass
+        if name == '70': #will display the name of the safe file?
+            name = f"Level ??"
         else:
             name = f"Level {stage}"
 
