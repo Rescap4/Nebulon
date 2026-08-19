@@ -35,8 +35,8 @@ class UI:
             {'fr': '[enter] Selectionner', 'eng': '[enter] Select'},
         ]
         self.level_text = '[P] Pause'
-        self.ending_text_1 = {'fr':["Les défis ne font que commencer...","","","","","","","","","","", "Merci d'avoir joué!"], 
-                              'eng':["Challenges are only begenning...","","","","","","","","","","", "Thank you for playing!"]}
+        self.ending_text_1 = {'fr':["Les niveaux défis sont débloqués!","","","","","","","","","","", "Merci d'avoir joué!"], 
+                              'eng':["Challenge levels are unlocked!","","","","","","","","","","", "Thanks for playing!"]}
         self.ending_text_2 = {'fr':["","","Ils vous remercient infiniment!","","","Tout les nébulons sont unis","Grâce à vous","","","","", "Félicitation!"],
                                 'eng':["","","They thank you infinitely!","","","All nebulons are united","Thanks to you","","","","", "Congratulations!"]}
         self.level_options = {'fr':['Continuer', 'Recommencer', 'Indice', 'Options', 'Quitter Niveau'],

@@ -15,7 +15,7 @@ echo.
 echo [2/3] Création de l'exe...
 echo       (Cela peut prendre 1-2 minutes)
 
-pyinstaller --onefile --add-data "data;data" --add-data "images;images" --add-data "sounds;sounds" --noconsole --name=Nebulon code/main.py
+pyinstaller --onefile --icon=images/icon.ico --add-data "data;data" --add-data "images;images" --add-data "sounds;sounds" --noconsole --name=Nebulon code/main.py
 
 if errorlevel 1 (
     echo.

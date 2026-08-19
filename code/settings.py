@@ -86,13 +86,13 @@ TEXT_HINT = {'fr':{
     31: """Niveau 31  Se rendre à l'autre extrémité une case à la fois requiert de passer le nebulon de l'autre côté pendant que l'autre reste à côté des piques""",
     32: """Niveau 32  Pousser l’autre est fait au minimum quatre fois, c'est essentiel pour sauver les deux""",
     33: """Niveau 33  À deux, il est possible de positionner une boîte presque partout""",
-    34: """Niveau 34  Toujours essayer de déduire quelle batterie doit être prise en dernier, explorer tout le niveau par la suite""", #Les solidifications montrent le chemin de la boîte
-    35: """Niveau 35  Pour enligner deux nebulons il faut deux surfaces, une boîte est une surface""", #Les solidifications montrent le chemin de la boîte
-    36: """Niveau 36  Les solidifications montrent le chemin de la boîte""",                    #Les solidifications montrent le chemin de la boîte            
-    37: """Niveau 37  Les solidifications montrent le chemin de la boîte""",            #Les solidifications montrent le chemin de la boîte       
-    38: """Niveau 38  Les solidifications montrent le chemin de la boîte""",                      #Les solidifications montrent le chemin de la boîte
-    39: """Niveau 39  Les solidifications montrent le chemin de la boîte""",                                  #Les solidifications montrent le chemin de la boîte
-    40: """Niveau 40  Placer la boite à l'endroit initial du premier nebulon permet de se rendre en haut""",               #Les solidifications montrent le chemin de la boîte 
+    34: """Niveau 34  Toujours essayer de déduire quelle batterie doit être prise en dernier, explorer tout le niveau par la suite""",
+    35: """Niveau 35  Pour enligner deux nebulons il faut deux surfaces, une boîte est une surface""",
+    36: """Niveau 36  Les ancrages d'échafaudage montrent le chemin de la boîte""",           
+    37: """Niveau 37  Les ancrages d'échafaudage montrent le chemin de la boîte""",     
+    38: """Niveau 38  Les ancrages d'échafaudage montrent le chemin de la boîte""",
+    39: """Niveau 39  Les ancrages d'échafaudage montrent le chemin de la boîte""",
+    40: """Niveau 40  Placer la boite à l'endroit initial du premier nebulon permet de se rendre en haut""",
     70: """Pousser la boite à droite, à gauche puis vers le bas"""},
     'eng': {
     0: """Level 0   1- Reach the box by positioning yourself under the left battery   2- Push the box so it sits directly on the right battery   3- Collect the left battery   4- Push the box and collect the right battery along with the tablet""",
@@ -131,10 +131,10 @@ TEXT_HINT = {'fr':{
     33: """Level 33  With two nebulons, it is possible to position a box almost anywhere""",
     34: """Level 34  Always try to figure out which battery must be collected last, then explore the rest of the level""",
     35: """Level 35  To align two nebulons, two surfaces are needed; a box counts as a surface""",
-    36: """Level 36  The solidifications show locations the box will be""",
-    37: """Level 37  The solidifications show locations the box will be""",
-    38: """Level 38  The solidifications show locations the box will be""",
-    39: """Level 39  The solidifications show locations the box will be""",
+    36: """Level 36  The scaffold anchors show locations the box will need to be""",
+    37: """Level 37  The scaffold anchors show the path of the box""",
+    38: """Level 38  The scaffold anchors show the path of the box""",
+    39: """Level 39  The scaffold anchors show the path of the box""",
     40: """Level 40  Placing the box at the starting position of the first nebulon is key to reach the top""",
     70: """Level ??  Push the box to the right, to the left, then downward""",
 }}
@@ -161,7 +161,7 @@ TEXT_TABLETS = {'fr':[
     """Bien qu’il existe certainement des constantes objectives dans la nébuleuse, l’infini empêche une Vérité absolue. Par définition, le vrai devient faux un infini plus loin.  Ma solution: les vérités locales.  La seule vérité que je possède est la mienne, celle que j’ai fondée sur mes expérimentations et les vérités de mes confrères.  Ma vérité croît lorsqu’une de mes questions est répondue.  Toutefois, j’ai la forte intuition que certaines resteront sans réponse.  Ainsi, j'ai choisi que le Créateur existe sous une forme qui ne contredit en rien ma vérité.  Et si vous parvenez à me prouver le contraire, et bien j’apprendrai car ma vérité est malléable.  -Zaurion
 """,
 
-    """Maintenant que nous sommes unis, la preuve de l’Intelligent s’avère erronée, les filaments limites semblent se répéter dû à la résonance de nos ondulations.  Nous ne pouvons rien conclure sur la taille de la nébuleuse, mais le concept de vérité locale m’a profondément séduit.  Il nous octroie un véritable pouvoir sur ce qui nous est inatteignable tant que nous cherchons à élargir les frontières de notre savoir.  Mais surtout, elle nous aide à comprendre nos voisins.  En admettant que des parties de nos vérités diffèrent dû à nos vécus, il devient simple d’admirer la complexité et la diversité de chacun.  -Androme
+    """Maintenant que nous sommes unis, la preuve de l’Intelligent s’avère erronée, les filaments limites semblent se répéter dû à la résonance de nos ondulations.  Nous ne pouvons rien conclure sur la taille de la nébuleuse, mais le concept de vérité locale m’a profondément séduit.  Il nous octroie un véritable pouvoir sur ce qui nous est inatteignable tant que nous cherchons à élargir les frontières de notre savoir.  Mais surtout, elle nous aide à comprendre nos voisins.  En admettant que mes vérités diffèrent dû à mes vécus, il me devient plus simple d’admirer la complexité des autres.  -Androme
 """],
 
 'eng':[
@@ -172,19 +172,18 @@ TEXT_TABLETS = {'fr':[
 
     """The Great Bang is our mission, and it unfolds in two phases.  First, we must communicate with every Ignorant.  Then, we must all leave our structures in a specific order and at a precise moment.  The final goal is to collide with one another at the center of the nebula. The Intelligent has proven this is possible.  However, he wishes to confirm that the universe is not infinite before moving forward.  His plan gives purpose to all Communicants, and all are working toward it with conviction.  -Androme""",
 
-    """If we are all confined within these structures, it is because the Creator has decreed it so.  He is the holder of the Truth, and his grand design knows neither chance nor error.  He forged us in oblivion, initially isolated and devoid of awareness, to see if, over eternity, simple beings might rise toward the Truth.  The Great Bang will guide us toward our awakening.  -Androme
-""",
+    """If we are all confined within these structures, it is because the Creator has decreed it so.  He is the holder of the Truth, and his grand design is our own existence.  He forged us in oblivion, initially isolated and devoid of awareness.  All to see if, over eternity, simple beings might rise toward the Truth.  The Great Bang will guide us toward our awakening.  - Androme""",
 
-    """The nebula is infinite. The boundary filaments repeat endlessly. The Intelligent has just proved it.  Since then, chaos reigns. Our systems, beliefs, and emotions collapse.  Infinity means that all that is fundamentally possible exists. There exists an infinity of nebulons simply because, in certain places, matter assembled this way.  And with an infinite number of Ignorants, the Great Bang loses its meaning. The feeling of being stripped of all knowledge engulfs me. Should I even keep my role as a scribe?  -Androme
+    """The nebula is infinite. The boundary filaments repeat endlessly. The Intelligent has just proved it.  Since then, chaos reigns. Our systems, beliefs, and emotions collapsed.  Infinity means that all that is fundamentally possible exists. There exists an infinity of nebulons simply because, in certain places, matter assembled this way.  And with an infinite number of Ignorants, the Great Bang loses its meaning. The feeling of being stripped of all knowledge engulfs me. Should I even keep my role as a scribe?  -Androme
 """,
 
     """We believed in a Creator, because he gave meaning to our origin. We believed in the Truth, because it showed us a direction.  Yet in an infinite nebula, our origin is merely statistical, and our direction is unfortunately static.  As we entered the second phase of the Great Bang, most chose denial.  But I find myself questioning the very existence of the other nebulons. Perhaps I have been communicating with a random arrangement of cosmic waves from the beginning.  I feel far more alone now than when I was Ignorant. I envy my copy who was never contacted.  -Androme
 """,
 
-    """Though objective constants surely exist within the nebula, infinity forbids an absolute Truth. By definition, what is true becomes false an infinity away.  My solution: local truths.  The only truth I possess is my own, the one founded on my experiments and the truths of my peers. My truth grows whenever one of my questions finds an answer.  Yet I strongly sense that some will remain unanswered.  Thus, I have chosen that the Creator exists in a form that does not contradict my truth.  And if you can prove me otherwise, then I will gladly learn, because my truth is malleable.  -Zaurion
+    """Objective constants surely exist within the nebula but infinity forbids an absolute Truth. By definition, what is true becomes false an infinity away.  My solution: local truths.  The only truth I possess is my own, the one founded on my experiments and the truths of my peers. My truth grows whenever one of my questions finds an answer.  Yet I strongly sense that some will remain unanswered.  Thus, I have chosen that the Creator exists in a form that does not contradict my truth.  And if you can prove me otherwise, then I will gladly learn, because my truth is malleable.  -Zaurion
 """,
 
-    """Now that we are united, the Intelligent's proof appears flawed. The boundary filaments only seem to repeat because of the resonance of our waves.  We cannot conclude anything about the nebula's size, but the concept of local truth has deeply captivated me.  It grants us real power over what remains beyond reach, so long as we strive to expand the frontiers of our understanding.  But above all, it helps us comprehend our neighbors.  By accepting that parts of our truths differ because of our experiences, it becomes simple to admire the complexity and diversity of each other.  -Androme
+    """Now that we are united, the Intelligent's proof appears flawed. The boundary filaments only seem to repeat because of the resonance of our waves.  We cannot conclude anything about the nebula's size, but the concept of local truth has deeply captivated me.  It grants us real power over what remains beyond reach, so long as we strive to expand the frontiers of our understanding.  But above all, it helps us comprehend our neighbors.  By accepting that parts of my truth differ because of my experiences, it becomes simpler to admire the complexity of others.  -Androme
 """],
 }
 

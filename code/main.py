@@ -38,6 +38,10 @@ class Game:
         self.tmx_ending_1 = load_pygame(join(BASE_PATH, 'data', 'maps', 'ending_1.tmx'))
         self.tmx_ending_2 = load_pygame(join(BASE_PATH, 'data', 'maps', 'ending_2.tmx'))
 
+        # game icon
+        icon = import_image(join(BASE_PATH,"images","icon"), format = 'ico')
+        pygame.display.set_icon(icon)
+
         self.tmx_maps = {}
         self.audio_files = {}
         self.level_files = self.get_level_files()
@@ -73,7 +77,7 @@ class Game:
 
             if cutscene:
                 if self.current_stage.cutscene_timer.elapsed_time <= 17000:
-                    self.fade_oppacity = max(self.fade_oppacit - 2, 0)  # Fade-out after 8000ms
+                    self.fade_oppacity = max(self.fade_oppacity - 2, 0)  # Fade-out after 8000ms
                 else:
                     self.fade_oppacity = min(self.fade_oppacity + 2, 255)  # Continue fading in until fully visible
 
