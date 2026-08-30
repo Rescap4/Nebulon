@@ -83,7 +83,7 @@ TEXT_HINT = {'fr':{
     28: """Niveau 28  Sortir requiert quatre collisions de suite avec les trois boîtes""",
     29: """Niveau 29  Il faut déduire quelle batterie doit être collectée en premier et surtout laquelle doit être collectée en dernier""",
     30: """Niveau 30  Collecte la batterie de son côté gauche, ensuite détruire les blocs, puis le sommet de la colonne et termine par le reste de la colonne""",
-    31: """Niveau 31  Pour collecter les batteries d'un côté à l'autre, il faut avancer le tunnel du milieu une case à la fois. Pour progresser, il faut se retenir de collecter les batteries dès que possible. Il d'abord l'autre nebulon""",
+    31: """Niveau 31  Pour collecter les batteries d'un côté à l'autre, il faut avancer le tunnel du milieu une case à la fois. Pour progresser, il faut se retenir de collecter les batteries dès que possible. Il d'abord placer l'autre nebulon""",
     32: """Niveau 32  Utiliser un nebulon pour pousser l’autre est fait au minimum quatre fois, c'est essentiel pour sauver les deux""",
     33: """Niveau 33  À deux, il est possible de positionner une boîte presque partout""",
     34: """Niveau 34  Toujours essayer de déduire quelle batterie doit être prise en dernier, explorer tout le niveau par la suite""",
