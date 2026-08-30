@@ -16,7 +16,7 @@ class Save:
         self._default_info_template = {
             'language': 'eng',
             'grid': True,
-            'shake': True,
+            'shake': False,
             'music_volume': 5,
             'sound_volume': 5,
             'icon_pos': '[576, 704]',
